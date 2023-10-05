@@ -4,13 +4,7 @@
 
 <div class="mt-5 ms-auto  me-auto" style="width:600px">
     <div class="d-flex justify-content-between" >
-        <div>
-            <h2>What's up  {{auth()->user()->name}}</h2>
-            <form action="/logout" method="POST">
-                @csrf
-                <button class="btn btn-dark">Log out</button>
-            </form>
-        </div>
+    
         <div>
             <h3>Davomat</h3>
             <div class="mt-3 d-flex flex-row">                    

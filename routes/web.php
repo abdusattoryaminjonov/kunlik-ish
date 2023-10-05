@@ -48,3 +48,7 @@ Route::get('/work', function(){
     return view('work',['posts'=> $posts,'davomats'=>$davomats]);
 });
 
+Route::get('/login',function(){
+    return view('login');
+});
+

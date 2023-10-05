@@ -38,6 +38,6 @@ class UserController extends Controller
 
      function logout(){
       auth()->logout();
-      return redirect('/');
+      return redirect('/login');
      }
 }
