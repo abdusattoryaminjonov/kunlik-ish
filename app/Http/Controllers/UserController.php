@@ -32,7 +32,7 @@ class UserController extends Controller
         $incomingFields['password']=bcrypt($incomingFields['password']);
         $user=User::create($incomingFields);
         auth()->login($user);
-        return redirect('/');
+        return redirect('/login');
      }
 
 

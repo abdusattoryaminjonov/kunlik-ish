@@ -9,9 +9,9 @@
   <body>
     <div class="mt-5 ms-auto  me-auto" style=" width: 500px">
         <div class="d-flex" style="align-items: baseline">
-          <h1 class="m-3"><a href="/login" style="display: contents">User</a></h1>
-          <h2 class="m-2"><a href="/loginadmin" style="display: contents">Admin</a></h2>
-        </div>
+            <h1 class="m-3"><a href="/loginadmin" style="display: contents">Admin</a></h1>
+            <h2 class="m-2"><a href="/login" style="display: contents">User</a></h2>
+          </div>
         <form action="/login" method="POST" style=" width: 500px">
             @csrf
             <div class="mb-3">
@@ -22,7 +22,7 @@
             </div>
             <button  class="btn btn-primary">Submit</button>
         </form>
-        <form action="/r" method="GET" >
+        <form action="/radmin" method="GET" >
             <button class="btn btn-link ">Registratsiya</button>
         </form>
     </div>

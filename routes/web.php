@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DavomatController;
 use App\Models\Davomat;
 use App\Models\Post;
@@ -17,7 +18,9 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/admin',function(){
+    return view('admin');
+});
 Route::get('/', function () {
     $posts=Post::where('user_id',auth()->id())->get();
     $davomats=Davomat::where('user_id', auth()->id())->get();
@@ -51,4 +54,12 @@ Route::get('/work', function(){
 Route::get('/login',function(){
     return view('login');
 });
+Route::get('/loginadmin',function(){
+    return view('loginadmin');
+});
+
+Route::get('/radmin',function(){
+    return view('redistr-admin');
+});
+Route::post('/registr-admin',[AdminController::class,'adminqoshish']);
 
