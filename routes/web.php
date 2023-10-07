@@ -62,4 +62,8 @@ Route::get('/radmin',function(){
     return view('redistr-admin');
 });
 Route::post('/registr-admin',[AdminController::class,'adminqoshish']);
+Route::post('/login-admin',[AdminController::class,'login']);
+Route::post('/logout-admion',[AdminController::class,'logout']);
+
+
 

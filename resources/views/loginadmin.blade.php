@@ -12,7 +12,7 @@
             <h1 class="m-3"><a href="/loginadmin" style="display: contents">Admin</a></h1>
             <h2 class="m-2"><a href="/login" style="display: contents">User</a></h2>
           </div>
-        <form action="/login" method="POST" style=" width: 500px">
+        <form action="/login-admin" method="POST" style=" width: 500px">
             @csrf
             <div class="mb-3">
                 <input type="text" placeholder="user name" class="form-control" name="name">
