@@ -27,12 +27,13 @@
                     <a class="nav-link disabled" aria-disabled="true">Link</a>
                 </li>
             </ul>
-
+            {{-- @if(Auth::user()) --}}
             <h2>{{auth()->user()->name}}</h2>
             <form action="/logout" method="POST">
                 @csrf
                 <button class="btn btn-dark">Log out</button>
             </form>
+            {{-- @endif --}}
         </div>
     </div>
 </nav>
