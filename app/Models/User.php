@@ -49,5 +49,9 @@ class User extends Authenticatable
    }
    public function usersDavomat() {
     return $this->hasMany(Davomat::class, 'user_id');
-}
+   }
+    public function work(){
+        return $this->hasMany(Work::class);
+    }
+    
 }
