@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WorkController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Davomat;
@@ -19,6 +20,13 @@ use App\Http\Controllers\DavomatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/home', [WorkController::class,'index']);
+
+
+
+
+
+
 Route::get('/admin', function () {
     return view('admin');
 });
@@ -71,3 +79,7 @@ Route::get('/admin', function () {
     $davomats = Davomat::all();
     return view('admin', ['users' => $users, 'davomats' => $davomats]);
 });
+Route::get('/m', function () {
+    return view('menu');
+});
+Route::post('/search',[WorkController::class,'']);

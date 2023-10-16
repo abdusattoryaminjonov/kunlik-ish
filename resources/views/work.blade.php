@@ -1,22 +1,6 @@
 @extends('layout')
 @section('title', 'Work')
 @section('content')
-<div class="mt-3">
-    <div class="d-flex justify-content-around">
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
-</div>
 <div class="mt-5 ms-auto  me-auto" style="width:600px">
     <div class="d-flex justify-content-between" >
     
