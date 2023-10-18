@@ -19,9 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'age',
         'email',
         'phonenumber',
         'password',
+        'mark',
     ];
 
     /**
@@ -52,6 +55,10 @@ class User extends Authenticatable
    }
     public function work(){
         return $this->hasMany(Work::class);
+    }
+    public function type()
+    {
+        return $this->hasMany(Type::class,'user_id');
     }
     
 }

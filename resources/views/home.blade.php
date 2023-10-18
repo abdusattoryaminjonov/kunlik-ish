@@ -4,15 +4,12 @@
     <div class="mt-3">
         <div class="d-flex justify-content-around">
             <form action="/search" method="POST" class="d-flex " role="search">
-                <select style="width: 300px" id="inputState" class="form-select border border-primary mx-3"
-                    aria-placeholder="Ish turi">
-                    <option>Toshkent</option>
+                <select style="width: 300px" id="inputState" class="form-select border border-primary mx-3">
                     <option>Toshkent.v</option>
                     <option>Samarqand</option>
                     <option>Farg'ona</option>
                 </select>
-                <select style="width: 300px" id="inputState" class="form-select border border-primary chosen-select"
-                    aria-placeholder="Ish turi">
+                <select style="width: 300px" id="inputState" class="form-select border border-primary chosen-select">
                     @foreach ($v as $viloyat)
                         <optgroup label="{{ $viloyat->name_uz }}">
                             @foreach ($viloyat->tumanlari as $tuman)

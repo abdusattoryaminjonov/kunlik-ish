@@ -11,6 +11,7 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        <h2><a href="/work" class="link-underline-light">{{ auth()->guard('admin')->name }}</a></h2>
         <form action="/logout-admion" method="POST">
             @csrf
             <button class="btn btn-dark">Log out</button>

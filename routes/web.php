@@ -20,16 +20,9 @@ use App\Http\Controllers\DavomatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/home', [WorkController::class,'index']);
+Route::get('/home', [WorkController::class, 'index']);
 
 
-
-
-
-
-Route::get('/admin', function () {
-    return view('admin');
-});
 Route::get('/', function () {
     $posts = Post::where('user_id', auth()->id())->get();
     $davomats = Davomat::where('user_id', auth()->id())->get();
@@ -75,11 +68,20 @@ Route::post('/login-admin', [AdminController::class, 'login']);
 Route::post('/logout-admion', [AdminController::class, 'logout']);
 
 Route::get('/admin', function () {
-    $users = User::all();
-    $davomats = Davomat::all();
-    return view('admin', ['users' => $users, 'davomats' => $davomats]);
+    if (auth()->guard('admin')) {
+        $users = User::all();
+        $davomats = Davomat::all();
+        return view('admin', ['users' => $users, 'davomats' => $davomats]);
+    }
+    return view('loginadmin');
+
 });
+
 Route::get('/m', function () {
     return view('menu');
 });
-Route::post('/search',[WorkController::class,'']);
+Route::post('/search', [WorkController::class, '']);
+
+Route::get('/profil', function () {
+    return view('user_profil');
+});

@@ -28,11 +28,15 @@ class UserController extends Controller
    {
       $incomingFields = $request->validate([
          'name' => ['required', Rule::unique('users', 'name')],
+         'surname' => 'required',
+         'age' => 'required',
          'email' => ['required ', 'email'],
          'phonenumber' => 'required',
-         'password' => ['required', 'min:8', 'max:100']
+         'password' => ['required', 'min:8', 'max:100'],
+         'mark' => ['nullable']
       ]);
       $incomingFields['password'] = bcrypt($incomingFields['password']);
+      //dd($incomingFields);
       $user = User::create($incomingFields);
       auth()->login($user);
       return redirect('/login');
