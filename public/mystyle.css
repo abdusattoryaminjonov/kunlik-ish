@@ -2,3 +2,26 @@
     height: 45px !important;
     line-height: 44px !important;
 }
+
+.user_bg_style{
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-bottom: 20px;
+    width: auto;
+    height: 150px;
+    color: white;
+    background-color: #4e95ff;
+}
+
+.bg_style{
+    width: 500px;
+    height: auto;
+    background-color: rgba(233, 230, 230, 0.696);
+    border-radius: 20px;
+}
+.d_f_my{
+    align-items: baseline;   
+}
+.d_f_my h4{
+    margin-left: 10px;
+}

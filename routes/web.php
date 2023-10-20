@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\WorkController;
 use App\Models\Post;
+use App\Models\Type;
 use App\Models\User;
 use App\Models\Davomat;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DavomatController;
 
@@ -80,8 +81,14 @@ Route::get('/admin', function () {
 Route::get('/m', function () {
     return view('menu');
 });
+
 Route::post('/search', [WorkController::class, '']);
 
 Route::get('/profil', function () {
-    return view('user_profil');
+    $jobs = Type::where('user_id', auth()->id())->get();
+    return view('user_profil', compact('jobs'));
 });
+
+
+Route::post('/create-job',[UserController::class,'createJob']);
+Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob']);

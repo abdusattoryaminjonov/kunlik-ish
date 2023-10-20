@@ -1,95 +1,102 @@
-<div class="container"> 
-<div class="col-md-12">  
-    <div class="col-md-4">      
-        <div class="portlet light profile-sidebar-portlet bordered">
-            <div class="profile-userpic">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="img-responsive" alt=""> </div>
-            <div class="profile-usertitle">
-                <div class="profile-usertitle-name"> Marcus Doe </div>
-                <div class="profile-usertitle-job"> Developer </div>
-            </div>
-            <div class="profile-userbuttons">
-                <button type="button" class="btn btn-info  btn-sm">Follow</button>
-                <button type="button" class="btn btn-info  btn-sm">Message</button>
-            </div>
-            <div class="profile-usermenu">
-                <ul class="nav">
-                    <li class="active">
-                        <a href="#">
-                            <i class="icon-home"></i> Ticket List </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-settings"></i> Support Staff </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-info"></i> Configurations </a>
-                    </li>
-                </ul>
+@extends('layout')
+@section('content')
+    <div>
+        <div class="d-flex user_bg_style">
+            <div class="d-flex justify-content-center ">
+                <h1>{{ auth()->user()->name }} {{ auth()->user()->surname }}</h1>
+
             </div>
         </div>
-    </div>
-    <div class="col-md-8"> 
-        <div class="portlet light bordered">
-            <div class="portlet-title tabbable-line">
-                <div class="caption caption-md">
-                    <i class="icon-globe theme-font hide"></i>
-                    <span class="caption-subject font-blue-madison bold uppercase">Your info</span>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div>
-                
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Update</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-                    </ul>
-                
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="home">
-                            <form>
-                              <div class="form-group">
-                                <label for="inputName">Name</label>
-                                <input type="text" class="form-control" id="inputName" placeholder="Name">
-                              </div>
-                                <div class="form-group">
-                                <label for="inputLastName">Last Name</label>
-                                <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
-                                <input type="file" id="exampleInputFile">
-                                <p class="help-block">Example block-level help text here.</p>
-                              </div>
-                              <div class="checkbox">
-                                <label>
-                                  <input type="checkbox"> Check me out
-                                </label>
-                              </div>
-                              <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">Profile</div>
-                        <div role="tabpanel" class="tab-pane" id="messages">Messages</div>
-                        <div role="tabpanel" class="tab-pane" id="settings">Settings</div>
+        <div class="d-flex justify-content-center ">
+            <a href="#" style="color: rgb(67, 67, 67); text-decoration: none">
+                <div class="d-flex flex-column mb-3 p-3 bg_style">
+                    <div class="d-flex justify-content-start d_f_my">
+                        <img style="width: 16px !important" src="{{ asset('icons/email.ico') }}">
+                        <h4>{{ auth()->user()->email }}</h4>
                     </div>
-                
+                    <div class="d-flex justify-content-start d_f_my">
+                        <img style="width: 16px !important" src="{{ asset('icons/phone.ico') }}">
+                        <h4>{{ auth()->user()->phonenumber }}</h4>
+                    </div>
+                    <div class="d-flex justify-content-start d_f_my">
+                        <img style="width: 16px !important" src="{{ asset('icons/age.ico') }}">
+                        <h4>{{ auth()->user()->age }} yosh</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div>
+            <ul class="nav nav-tabs " style="justify-content: center;" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Kasbim</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                        type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ish
+                        yaratish</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+                        type="button" role="tab" aria-controls="contact-tab-pane"
+                        aria-selected="false">Ishlarim</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade d-flex flex-row mb-3" style="justify-content: space-evenly;" id="home-tab-pane"
+                    role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                    <div>
+                        <h4>Kasb qo'shish</h4>
+                        <form action="/create-job" method="POST">
+                            @csrf
+                            <select class="form-select" style="width: 150px" name="name">
+                                <option value="Quruvchi">Quruvchi</option>
+                                <option value="Tikuvchi">Tikuvchi</option>
+                                <option value="Tozalovchi">Tozalovchi</option>
+                                <option value="Mehanik">Mehanik</option>
+                                <option value="Haydovchi">Haydovchi</option>
+                                <option value="Oddiy ishchi">Oddiy ishchi</option>
+                                <option value="Musiqachi">Musiqachi</option>
+                                <option value="Hisobchi">Hisobchi</option>
+                            </select>
+                            <button class="m-3"
+                                style="background-color: #4e95ff;color:white; border-radius:5px">saqlash</button>
+                        </form>
+                    </div>
+                    <div>
+                        <h4>Mening kasblarim</h4>
+                        <table class="table table-borderless">
+                            <tbody>
+                                @foreach ($jobs as $job)
+                                    <div class="d-flex flex-row mb-3">
+                                        <tr>
+                                            <td>
+                                                <h5 class="mt-2">{{ $job['name'] }}</h5>
+                                            </td>
+                                            <td>
+                                                <form action="/delete-job/{{ $job->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-link">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
+                    tabindex="0">
+                    new
+                </div>
+                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
+                    tabindex="0">
+                    follow
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+@endsection
