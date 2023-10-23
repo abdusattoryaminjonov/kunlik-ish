@@ -23,6 +23,8 @@
                 </li>
             </ul>
         </div>
+        @auth
+            
         <h4><a href="/profil" class="link-underline-light">{{ auth()->user()->name }}</a></h4>
         <form action="/logout" method="POST">
             @csrf
@@ -30,6 +32,9 @@
                 <img style="width: 20px !important" src="{{ asset('icons/log_out.ico') }}">
             </button>
         </form>
-
+        @endauth
+        @guest
+         <a href="/login">login</a>   
+        @endguest
     </div>
 </nav>

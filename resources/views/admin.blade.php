@@ -13,7 +13,7 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button"
-                role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+                role="tab" aria-controls="contact-tab-pane" aria-selected="false">Kasblar</button>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -64,7 +64,45 @@
             </table>
         </div>
         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-            ...
+            <div>
+                <h4>Kasb qo'shish</h4>
+                <form action="/create_job" method="POST">
+                    @csrf
+                    <input type="text" placeholder="yangi kasb kiriting..." name="name">
+                    <button class="btn btn-primary">qo'shish</button>
+                </form>
+            </div>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nomi</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($jobs as $job)
+                            <div>
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>
+                                        <h5 class="mt-2">{{ $job['name'] }}</h5>
+                                    </td>
+                                    <td>
+                                        <form action="/delete-job/{{ $job->id }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-link">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </div>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 @endsection

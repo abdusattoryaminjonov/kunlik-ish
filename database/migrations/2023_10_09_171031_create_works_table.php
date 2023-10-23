@@ -11,14 +11,17 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('works', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('date');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('district_id')->constrained();
+            
+            $table->id();                                   // id
+            $table->foreignId('user_id')->constrained();    // user id 
+            $table->string('title');                        // sarlavha
+            $table->string('description');                  // to'liq malumot
+            $table->dateTime('date');                       // ish sanasi
+            $table->string('job');                          // kasb
+            $table->integer('workers');                     // odam soni
+            $table->double('price');                        // narxi
+            $table->integer('agreeables');                  // rozi bo'lganlar
             $table->timestamps();
-            // $table->bigInteger("adress_id");
-            // $table->foreign('adress_id')->references('id')->on('adresses'); //->onDelete('cascade');
         });
     }
 

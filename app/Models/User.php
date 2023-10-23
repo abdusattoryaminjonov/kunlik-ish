@@ -25,6 +25,7 @@ class User extends Authenticatable
         'phonenumber',
         'password',
         'mark',
+        'place'
     ];
 
     /**
@@ -47,18 +48,27 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-   public function usersCoolPosts() {
-       return $this->hasMany(Post::class, 'user_id');
-   }
-   public function usersDavomat() {
-    return $this->hasMany(Davomat::class, 'user_id');
-   }
-    public function work(){
+    public function usersCoolPosts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
+    }
+    public function usersDavomat()
+    {
+        return $this->hasMany(Davomat::class, 'user_id');
+    }
+    public function work()
+    {
         return $this->hasMany(Work::class);
     }
-    public function type()
+
+    public function jobs()
     {
-        return $this->hasMany(Type::class,'user_id');
+        return $this->belongsToMany(Job::class, 'user_job', 'user_id', 'job_id');
     }
-    
+
+
+    public function tuman()
+    {
+        return $this->belongsTo(Tuman::class, 'place');
+    }
 }

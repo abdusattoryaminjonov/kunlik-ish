@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,7 +35,8 @@ class UserController extends Controller
          'email' => ['required ', 'email'],
          'phonenumber' => 'required',
          'password' => ['required', 'min:8', 'max:100'],
-         'mark' => ['nullable']
+         'mark' => ['nullable'],
+         'place' => 'required'
       ]);
       $incomingFields['password'] = bcrypt($incomingFields['password']);
       //dd($incomingFields);
@@ -48,18 +50,21 @@ class UserController extends Controller
       $incomingFields = $request->validate([
          'name' => 'required',
       ]);
-      $incomingFields['name'] = strip_tags($incomingFields['name']);
-      $incomingFields['user_id'] = auth()->id();
-      Type::create($incomingFields);
+
+      auth()->user()->jobs()->attach($incomingFields['name']);
+      // $incomingFields['name'] = strip_tags($incomingFields['name']);
+      // $incomingFields['user_id'] = auth()->id();
+      // Job::create($incomingFields);
       return redirect('/profil');
    }
 
-   function deleteJob(Type $job){
-      if (auth()->user()->id === $job['user_id']) {
-         $job->delete();
-      }
-      return redirect('/profil');
-   }
+   // function deleteJob(Type $job)
+   // {
+   //    if (auth()->user()->id === $job['user_id']) {
+   //       $job->delete();
+   //    }
+   //    return redirect('/profil');
+   // }
    function logout()
    {
       auth()->logout();

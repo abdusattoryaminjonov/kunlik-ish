@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\JobController;
+use App\Models\Job;
 use App\Models\Post;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\Davomat;
+use App\Models\Viloyat;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -31,7 +34,8 @@ Route::get('/', function () {
     return view('welcome', ['posts' => $posts, 'davomats' => $davomats]);
 });
 Route::get('/r', function () {
-    return view('registration');
+    $v = Viloyat::with('tumanlari')->get();
+    return view('registration', compact('v'));
 });
 Route::post('/register', [UserController::class, 'register']);
 
@@ -72,7 +76,8 @@ Route::get('/admin', function () {
     if (auth()->guard('admin')) {
         $users = User::all();
         $davomats = Davomat::all();
-        return view('admin', ['users' => $users, 'davomats' => $davomats]);
+        $jobs = Job::all();
+        return view('admin', ['users' => $users, 'davomats' => $davomats, 'jobs' => $jobs]);
     }
     return view('loginadmin');
 
@@ -85,10 +90,11 @@ Route::get('/m', function () {
 Route::post('/search', [WorkController::class, '']);
 
 Route::get('/profil', function () {
-    $jobs = Type::where('user_id', auth()->id())->get();
+    $jobs = Job::all();
     return view('user_profil', compact('jobs'));
 });
 
 
-Route::post('/create-job',[UserController::class,'createJob']);
+Route::post('/create-job', [UserController::class, 'createJob'])->name('user.jobs.add');
 Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob']);
+

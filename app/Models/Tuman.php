@@ -14,4 +14,7 @@ class Tuman extends Model
     {
         return $this->belongsTo(Viloyat::class, 'region_id');
     }
+    public function users(){
+        return $this->hasMany(User::class,'place');
+    }
 }

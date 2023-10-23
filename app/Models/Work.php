@@ -9,10 +9,14 @@ class Work extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
-        'date',
-        'adress_id',
         'user_id',
+        'title',
+        'description',
+        'date',
+        'job',
+        'workers',
+        'price',
+        'agreeables'
     ];
 
     public function user()

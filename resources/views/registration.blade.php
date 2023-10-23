@@ -25,6 +25,17 @@
             <div class="mb-3">
                 <input type="email" placeholder="email" class="form-control" name="email">
             </div>
+            <div class="mb-3">
+                <select id="inputState" class="form-select border border-primary chosen-select" name="place">
+                    @foreach ($v as $viloyat)
+                        <optgroup label="{{ $viloyat->name_uz }}">
+                            @foreach ($viloyat->tumanlari as $tuman)
+                                <option value="{{ $tuman->id }}">{{ $tuman->name_uz }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                </select>
+            </div>
 
             <div class="mb-3">
                 <input type="text" placeholder="+998901234567" class="form-control" name="phonenumber">

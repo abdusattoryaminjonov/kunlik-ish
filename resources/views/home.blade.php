@@ -5,14 +5,9 @@
         <div class="d-flex justify-content-around">
             <form action="/search" method="POST" class="d-flex " role="search">
                 <select style="width: 300px" id="inputState" class="form-select border border-primary mx-3" name="job">
-                    <option value="Quruvchi">Quruvchi</option>
-                    <option value="Tikuvchi">Tikuvchi</option>
-                    <option value="Tozalovchi">Tozalovchi</option>
-                    <option value="Mehanik">Mehanik</option>
-                    <option value="Haydovchi">Haydovchi</option>
-                    <option value="Oddiy ishchi">Oddiy ishchi</option>
-                    <option value="Musiqachi">Musiqachi</option>
-                    <option value="Hisobchi">Hisobchi</option>
+                    @foreach ($jobs as $job)
+                        <option value="{{ $job->id }}">{{ $job->name }}</option>
+                    @endforeach
                 </select>
                 <select style="width: 300px" id="inputState" class="form-select border border-primary chosen-select"
                     name="joyi">
