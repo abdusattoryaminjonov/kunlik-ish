@@ -12,6 +12,7 @@ class Work extends Model
         'user_id',
         'title',
         'description',
+        'place',
         'date',
         'job',
         'workers',

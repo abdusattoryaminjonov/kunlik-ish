@@ -25,3 +25,14 @@
 .d_f_my h4{
     margin-left: 10px;
 }
+.edit_user{
+    transition: all 1s ease;
+}
+.edit_user:hover{
+    border: 2px;
+    border-color: rgb(173, 171, 173, 1);
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.75);
+    
+}

@@ -11,11 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('works', function (Blueprint $table) {
-            
             $table->id();                                   // id
             $table->foreignId('user_id')->constrained();    // user id 
             $table->string('title');                        // sarlavha
             $table->string('description');                  // to'liq malumot
+            $table->integer('place');                       // joyi
             $table->dateTime('date');                       // ish sanasi
             $table->string('job');                          // kasb
             $table->integer('workers');                     // odam soni

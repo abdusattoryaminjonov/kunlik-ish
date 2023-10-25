@@ -28,7 +28,7 @@
         <form action="/create-post" method="POST">
             @csrf
             <input class="form-control mt-3" type="text" placeholder="Sarlavha" name="title">
-            <textarea  class="form-control mt-3" name="body" placeholder="Text yoz..."></textarea>
+            <textarea     class="form-control mt-3" name="body" placeholder="Text yoz..."></textarea>
             <button class="btn btn-primary mt-3">Saqlash</button>
         </form>
 

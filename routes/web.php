@@ -90,11 +90,14 @@ Route::get('/m', function () {
 Route::post('/search', [WorkController::class, '']);
 
 Route::get('/profil', function () {
-    $jobs = Job::all();
-    return view('user_profil', compact('jobs'));
+    $jobs = Job::orderBy('name')->get();
+    $v = Viloyat::with('tumanlari')->get();
+    return view('user_profil', compact('jobs', 'v'));
 });
 
 
 Route::post('/create-job', [UserController::class, 'createJob'])->name('user.jobs.add');
 Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob']);
+
+Route::post('/create-work', [WorkController::class,''])->name('user.work.create');
 

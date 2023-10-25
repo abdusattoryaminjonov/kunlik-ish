@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -52,19 +51,16 @@ class UserController extends Controller
       ]);
 
       auth()->user()->jobs()->attach($incomingFields['name']);
-      // $incomingFields['name'] = strip_tags($incomingFields['name']);
-      // $incomingFields['user_id'] = auth()->id();
-      // Job::create($incomingFields);
       return redirect('/profil');
    }
 
-   // function deleteJob(Type $job)
-   // {
-   //    if (auth()->user()->id === $job['user_id']) {
-   //       $job->delete();
-   //    }
-   //    return redirect('/profil');
-   // }
+   function deleteJob(Job $job)
+   {
+      if (auth()->user()->id === $job['user_id']) {
+         $job->delete();
+      }
+      return redirect('/profil');
+   }
    function logout()
    {
       auth()->logout();
