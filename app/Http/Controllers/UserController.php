@@ -56,9 +56,8 @@ class UserController extends Controller
 
    function deleteJob(Job $job)
    {
-      if (auth()->user()->id === $job['user_id']) {
-         $job->delete();
-      }
+      auth()->user()->jobs()->detach($job->id);
+      $job->delete();
       return redirect('/profil');
    }
    function logout()

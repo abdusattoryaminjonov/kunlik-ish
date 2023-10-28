@@ -36,3 +36,16 @@
     box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.75);
     
 }
+.sentre1{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    margin-left: 170px;
+}
+.work-post{
+    margin: 10px;
+    width: 500px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: rgba(233, 230, 230, 0.696);
+}

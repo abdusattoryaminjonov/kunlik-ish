@@ -95,9 +95,12 @@ Route::get('/profil', function () {
     return view('user_profil', compact('jobs', 'v'));
 });
 
+Route::post('/job-create', [JobController::class, 'createJob'])->name('job.add');
+Route::delete('/job-delete/{job}', [JobController::class, 'deleteJob'])->name('job.dalet');
+
 
 Route::post('/create-job', [UserController::class, 'createJob'])->name('user.jobs.add');
-Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob']);
+Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob'])->name('user.delete.job');
 
-Route::post('/create-work', [WorkController::class,''])->name('user.work.create');
+Route::post('/create-work', [WorkController::class, 'createWork'])->name('user.work.create');
 

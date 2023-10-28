@@ -66,7 +66,7 @@
         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
             <div>
                 <h4>Kasb qo'shish</h4>
-                <form action="/create_job" method="POST">
+                <form action="{{ route('job.add') }}" method="POST">
                     @csrf
                     <input type="text" placeholder="yangi kasb kiriting..." name="name">
                     <button class="btn btn-primary">qo'shish</button>
@@ -90,7 +90,8 @@
                                         <h5 class="mt-2">{{ $job['name'] }}</h5>
                                     </td>
                                     <td>
-                                        <form action="/delete-job/{{ $job->id }}" method="POST">
+                                        {{-- {{route('job.delete', ['job'=>$job->id])}} --}}
+                                        <form action="" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-link">Delete</button>

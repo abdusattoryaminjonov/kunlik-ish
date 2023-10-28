@@ -17,6 +17,7 @@ class JobController extends Controller
     }
     function deleteJob(Job $job)
     {
+        $job->users()->detach();
         $job->delete();
         return redirect('/admin');
     }
