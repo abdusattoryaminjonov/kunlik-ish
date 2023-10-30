@@ -14,7 +14,8 @@ class WorkController extends Controller
     {
         $jobs = Job::orderBy('name')->get();
         $v = Viloyat::with('tumanlari')->get();
-        return view('home', compact('v', 'jobs'));
+        $works = Work::with('tuman')->get();
+        return view('home', compact('v', 'jobs','works'));
     }
     public function createWork(Request $request)
     {

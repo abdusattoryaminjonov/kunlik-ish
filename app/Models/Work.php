@@ -24,8 +24,14 @@ class Work extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function adress()
     {
         return $this->belongsTo(Adress::class);
+    }
+
+        public function tuman()
+    {
+        return $this->belongsTo(Tuman::class, 'place');
     }
 }

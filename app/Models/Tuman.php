@@ -17,4 +17,8 @@ class Tuman extends Model
     public function users(){
         return $this->hasMany(User::class,'place');
     }
+    public function works()
+    {
+        return $this->hasMany(Work::class, 'place');
+    }
 }

@@ -49,3 +49,10 @@
     border-radius: 10px;
     background-color: rgba(233, 230, 230, 0.696);
 }
+
+.b_r_color{ 
+    border-color: #8e8f90 !important;
+    border-radius: 20px;
+    border-width: 2px;
+    background-image: ;
+}

@@ -92,6 +92,7 @@ Route::post('/search', [WorkController::class, '']);
 Route::get('/profil', function () {
     $jobs = Job::orderBy('name')->get();
     $v = Viloyat::with('tumanlari')->get();
+    // $v = Viloyat::all();
     return view('user_profil', compact('jobs', 'v'));
 });
 
