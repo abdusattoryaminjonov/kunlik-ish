@@ -3,14 +3,14 @@
 @section('content')
     <div class="mt-3">
         <div class="d-flex justify-content-around">
-            <form action="/search" method="POST" class="d-flex " role="search">
+            <form action="{{route('search')}}" method="GET" class="d-flex " role="search">
                 <select style="width: 300px" id="inputState" class="form-select border border-primary mx-3" name="job">
                     @foreach ($jobs as $job)
                         <option value="{{ $job->id }}">{{ $job->name }}</option>
                     @endforeach
                 </select>
                 <select style="width: 300px" id="inputState" class="form-select border border-primary chosen-select"
-                    name="joyi">
+                    >
                     @foreach ($v as $viloyat)
                         <optgroup label="{{ $viloyat->name_uz }}">
                             @foreach ($viloyat->tumanlari as $tuman)
@@ -34,28 +34,89 @@
                         the web with the world's most popular front-end component library.</p>
                 </div>
             </div><!--end col-->
-
-
         </div><!--end row-->
-        @foreach ($works as $work)
-            <div class="row">
+        {{-- <div class="grid text-center" style="--bs-columns: 3;"> --}}
+        <div class="row">
+            @foreach ($works as $work)
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card border-0 bg-light rounded shadow">
                         <div class="card-body p-4">
                             <h5>{{ $work->title }}</h5>
                             <div class="mt-3">
-                                <h6>{{ $work->description }}</h6>
+                                <h3 style="color: rgb(72, 135, 21)">{{ $work->price }} so'm</h3>
+                                <h5>{{ $work->date }}</h5>
                                 <hr>
                                 <span class="text-muted d-block"><i class="fa fa-map-marker"
                                         aria-hidden="true"></i>{{ $work->tuman->name_uz }}</span>
                             </div>
                             <div class="mt-3">
-                                <a href="" class="btn btn-primary">To'liq ko'rish</a>
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal_{{ $work->id }}">
+                                    To'liq ko'rish
+                                </button>
                             </div>
                             <div class="mt-3 d-flex">
                                 <p>created in :</p>
                                 <label style="margin-left: 5px">{{ $work->created_at->format('Y-m-d') }}</label>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        {{-- </div> --}}
+
+        @foreach ($works as $work)
+            <div class="modal fade" id="exampleModal_{{ $work->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $work->title }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h6>{{ $work->description }}</h6>
+                            <hr>
+                            <div class="d-flex mt-2">
+                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/user.ico') }}"
+                                    alt="">
+                                <a href="" class="link-underline-light">{{ $work->user->name }} :
+                                    owner</a>
+                            </div>
+                            <hr>
+                            <div class="d-flex mt-2">
+                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/kalendar.ico') }}"
+                                    alt="">
+                                <h6>{{ $work->date }}</h6>
+                            </div>
+                            <div class="d-flex mt-2">
+                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/kasb.ico') }}"
+                                    alt="">
+                                <h6>{{ $work->job}}</h6>
+                            </div>
+                            <div class="d-flex mt-2">
+                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/tuman.ico') }}"
+                                    alt="">
+                                <h6>{{ $work->tuman->name_uz }}</h6>
+                            </div>
+                            <div class="d-flex text-center mt-2">
+                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/users.ico') }}"
+                                    alt="">
+                                <h6>{{ $work->workers }} ta odam
+                                </h6>
+                            </div>
+                            <div class="d-flex text-center mt-2">
+                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/workers_price.ico') }}"
+                                    alt="">
+                                <h6>{{ $work->price }} so'm</h6>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                            <form action="" method="">
+                                <button class="btn btn-primary">Qo'shilish</button>
+                            </form>
                         </div>
                     </div>
                 </div>

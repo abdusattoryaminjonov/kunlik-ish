@@ -6,6 +6,7 @@ use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Auth;
 
 class UserController extends Controller
 {
@@ -42,6 +43,27 @@ class UserController extends Controller
       $user = User::create($incomingFields);
       auth()->login($user);
       return redirect('/login');
+   }
+
+   public function editUser(Request $request)
+   {
+      $user = Auth::user();
+      $user->name = $request->input('name');
+      $user->surname = $request->input('surname');
+      $user->age = $request->input('age');
+      $user->email = $request->input('email');
+      $user->phonenumber = $request->input('phonenumber');
+      $user->place = $request->input('place');
+      $user->save();
+      return redirect('profil');
+   }
+
+   public function changePassword(Request $request)
+   {
+      $user = Auth::user();
+      $user->password = bcrypt($request->input('password'));
+      $user->save();
+      return redirect('profil');
    }
 
    public function createJob(Request $request)

@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\JobController;
 use App\Models\Job;
 use App\Models\Post;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\Work;
 use App\Models\Davomat;
 use App\Models\Viloyat;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkController;
@@ -25,7 +26,7 @@ use App\Http\Controllers\DavomatController;
 |
 */
 Route::get('/home', [WorkController::class, 'index']);
-
+Route::get('/search', [WorkController::class,'searchWorks'])->name('search');
 
 Route::get('/', function () {
     $posts = Post::where('user_id', auth()->id())->get();
@@ -90,11 +91,16 @@ Route::get('/m', function () {
 Route::post('/search', [WorkController::class, '']);
 
 Route::get('/profil', function () {
+    $works = Work::where('user_id', auth()->id())->get();
     $jobs = Job::orderBy('name')->get();
     $v = Viloyat::with('tumanlari')->get();
     // $v = Viloyat::all();
-    return view('user_profil', compact('jobs', 'v'));
-});
+    return view('user_profil', compact('jobs', 'v', 'works'));
+})->name('profil');
+
+Route::put('/edit-user-data', [UserController::class, 'editUser'])->name('edit_user');
+Route::put('/change-password', [UserController::class, 'changePassword'])->name('change_password');
+
 
 Route::post('/job-create', [JobController::class, 'createJob'])->name('job.add');
 Route::delete('/job-delete/{job}', [JobController::class, 'deleteJob'])->name('job.dalet');

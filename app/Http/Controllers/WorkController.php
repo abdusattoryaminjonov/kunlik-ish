@@ -14,13 +14,13 @@ class WorkController extends Controller
     {
         $jobs = Job::orderBy('name')->get();
         $v = Viloyat::with('tumanlari')->get();
-        $works = Work::with('tuman')->get();
-        return view('home', compact('v', 'jobs','works'));
+        $works = Work::with('tuman', 'job')->get();
+        return view('home', compact('v', 'jobs', 'works'));
     }
     public function createWork(Request $request)
     {
         $incomingFields = $request->validate([
-            'title' => 'required|string|min:8' ,
+            'title' => 'required|string|min:8',
             'description' => 'required',
             'place' => 'required',
             'date' => 'required',
@@ -40,6 +40,21 @@ class WorkController extends Controller
         $incomingFields['user_id'] = auth()->id();
         Work::create($incomingFields);
         return redirect('/profil');
+    }
+    public function searchWorks(Request $request)
+    {
+        // Get the search value from the request
+        $searchJob = $request->input('job');
+        //$searchPlace = $request->input('place');
+
+        // Search in the title and body columns from the posts table
+        $works = Work::query()
+            ->where('job', 'LIKE', "%{$searchJob}%")
+            //->orWhere('place', 'LIKE', "%{$searchPlace}%")
+            ->get();
+
+        // Return the search view with the resluts compacted
+        return view('searchJob', compact('works'));
     }
 
 }

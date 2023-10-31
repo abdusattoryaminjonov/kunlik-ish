@@ -117,39 +117,42 @@
                         <div class="tab-pane active" id="profile">
                             <h4>{{ auth()->user()->name }} {{ auth()->user()->surname }}</h4>
                             <hr>
-                            <form>
+                            <form action="{{ route('edit_user') }}" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div class="form-group">
-                                    <label for="fullName">Name</label>
-                                    <input type="text" class="form-control" id="fullName"
+                                    <label for="name">Name and username</label>
+                                    <input type="text" name="name" class="form-control" id="name"
                                         aria-describedby="fullNameHelp" placeholder="Enter your name"
                                         value="{{ auth()->user()->name }}">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="fullName">Surname</label>
-                                    <input type="text" class="form-control" id="fullName"
+                                    <label for="surname">Surname</label>
+                                    <input type="text" name="surname" class="form-control" id="surname"
                                         aria-describedby="fullNameHelp" placeholder="Enter your sername"
                                         value="{{ auth()->user()->surname }}">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="fullName">Your email</label>
-                                    <input type="email" class="form-control" id="fullName"
+                                    <label for="email">Your email</label>
+                                    <input type="email" name="email" class="form-control" id="email"
                                         aria-describedby="fullNameHelp" placeholder="Enter your email"
                                         value="{{ auth()->user()->email }}">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="fullName">Phone number</label>
-                                    <input type="text" class="form-control" id="fullName"
+                                    <label for="phonenumber">Phone number</label>
+                                    <input type="text" name="phonenumber" class="form-control" id="phonenumber"
                                         aria-describedby="fullNameHelp" placeholder="+998901234567"
                                         value="{{ auth()->user()->phonenumber }}">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="url">Age</label>
-                                    <input type="number" class="form-control" id="url"
+                                    <label for="age">Age</label>
+                                    <input type="number" name="age" class="form-control" id="age"
                                         placeholder="Enter your website age" value="{{ auth()->user()->age }}">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="location">Location</label>
-                                    <select id="inputState" class="form-select border border-primary chosen-select"
+                                    <select id="inputState" id="location"
+                                        class="form-select border border-primary chosen-select"
                                         style="border-color: #97a7c0 !important;" name="place">
                                         @foreach ($v as $viloyat)
                                             <optgroup label="{{ $viloyat->name_uz }}">
@@ -168,7 +171,7 @@
                                 <div class="form-group small text-muted mt-3">
                                     Change all data
                                 </div>
-                                <button type="button" class="btn btn-primary">Update Profile</button>
+                                <button class="btn btn-primary">Update Profile</button>
                             </form>
                             <hr>
                             <h4>Kasb qo'shish</h4>
@@ -334,14 +337,17 @@
                         <div class="tab-pane" id="security">
                             <h6>SECURITY SETTINGS</h6>
                             <hr>
-                            <form>
+                            <form action="{{ route('change_password') }}" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div class="form-group">
                                     <label class="d-block">Change Password</label>
                                     <input type="text" class="form-control mt-1" placeholder="New password">
-                                    <input type="text" class="form-control mt-1" placeholder="Confirm new password">
+                                    <input type="text" class="form-control mt-1" placeholder="Confirm new password"
+                                        name="password">
                                 </div>
                                 <hr>
-                                <button class="btn btn-info" type="button">Change</button>
+                                <button class="btn btn-info">Change</button>
                             </form>
                         </div>
                         <div class="tab-pane" id="notification">
@@ -420,8 +426,109 @@
                                 </div>
                                 <div class="form-group mb-0">
                                     <label class="d-block">Payment History</label>
-                                    <div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">You have
-                                        not made any payment.</div>
+                                    <div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
+                                        <div >
+                                            @foreach ($works as $work)
+                                                <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                                                    <div class="card border-0 bg-light rounded shadow">
+                                                        <div class="card-body p-4">
+                                                            <h5>{{ $work->title }}</h5>
+                                                            <div class="mt-3">
+                                                                <h3 style="color: rgb(72, 135, 21)">
+                                                                    {{ $work->price }} so'm</h3>
+                                                                <h5>{{ $work->date }}</h5>
+                                                                <hr>
+                                                                <span class="text-muted d-block"><i
+                                                                        class="fa fa-map-marker"
+                                                                        aria-hidden="true"></i>{{ $work->tuman->name_uz }}</span>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                                                    data-bs-target="#exampleModal_{{ $work->id }}">
+                                                                    To'liq ko'rish
+                                                                </button>
+                                                            </div>
+                                                            <div class="mt-3 d-flex">
+                                                                <p>created in :</p>
+                                                                <label
+                                                                    style="margin-left: 5px">{{ $work->created_at->format('Y-m-d') }}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            {{-- </div> --}}
+
+                                            @foreach ($works as $work)
+                                                <div class="modal fade" id="exampleModal_{{ $work->id }}"
+                                                    tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    {{ $work->title }}</h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h6>{{ $work->description }}</h6>
+                                                                <hr>
+                                                                <div class="d-flex mt-2">
+                                                                    <img style="width: 25px; margin-right: 5px"
+                                                                        src="{{ asset('icons/user.ico') }}"
+                                                                        alt="">
+                                                                    <a href=""
+                                                                        class="link-underline-light">{{ $work->user->name }}
+                                                                        :
+                                                                        owner</a>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="d-flex mt-2">
+                                                                    <img style="width: 25px; margin-right: 5px"
+                                                                        src="{{ asset('icons/kalendar.ico') }}"
+                                                                        alt="">
+                                                                    <h6>{{ $work->date }}</h6>
+                                                                </div>
+                                                                <div class="d-flex mt-2">
+                                                                    <img style="width: 25px; margin-right: 5px"
+                                                                        src="{{ asset('icons/kasb.ico') }}"
+                                                                        alt="">
+                                                                    <h6>{{ $work->job }}</h6>
+                                                                </div>
+                                                                <div class="d-flex mt-2">
+                                                                    <img style="width: 25px; margin-right: 5px"
+                                                                        src="{{ asset('icons/tuman.ico') }}"
+                                                                        alt="">
+                                                                    <h6>{{ $work->tuman->name_uz }}</h6>
+                                                                </div>
+                                                                <div class="d-flex text-center mt-2">
+                                                                    <img style="width: 25px; margin-right: 5px"
+                                                                        src="{{ asset('icons/users.ico') }}"
+                                                                        alt="">
+                                                                    <h6>{{ $work->workers }} ta odam
+                                                                    </h6>
+                                                                </div>
+                                                                <div class="d-flex text-center mt-2">
+                                                                    <img style="width: 25px; margin-right: 5px"
+                                                                        src="{{ asset('icons/workers_price.ico') }}"
+                                                                        alt="">
+                                                                    <h6>{{ $work->price }} so'm</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Yopish</button>
+                                                                <form action="" method="">
+                                                                    <button class="btn btn-primary">Qo'shilish</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>

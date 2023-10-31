@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('title');                        // sarlavha
             $table->string('description');                  // to'liq malumot
             $table->integer('place');                       // joyi
-            $table->dateTime('date');                       // ish sanasi
+            $table->date('date');                           // ish sanasi
             $table->string('job');                          // kasb
             $table->integer('workers');                     // odam soni
             $table->double('price');                        // narxi

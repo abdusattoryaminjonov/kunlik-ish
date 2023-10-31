@@ -30,8 +30,12 @@ class Work extends Model
         return $this->belongsTo(Adress::class);
     }
 
-        public function tuman()
+    public function tuman()
     {
         return $this->belongsTo(Tuman::class, 'place');
+    }
+    public function job()
+    {
+        return $this->belongsTo(Job::class, 'job');
     }
 }
