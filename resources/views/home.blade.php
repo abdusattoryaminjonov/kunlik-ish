@@ -3,14 +3,17 @@
 @section('content')
     <div class="mt-3">
         <div class="d-flex justify-content-around">
-            <form action="{{route('search')}}" method="GET" class="d-flex " role="search">
-                <select style="width: 300px" id="inputState" class="form-select border border-primary mx-3" name="job">
+            <form action="{{ route('search') }}" method="POST" class="d-flex " role="search">
+                @csrf
+                <select style="width: 300px;  " id="inputState" class="form-select   chosen-select" name="job">
+                    <option selected disabled>Which job</option>
                     @foreach ($jobs as $job)
                         <option value="{{ $job->id }}">{{ $job->name }}</option>
                     @endforeach
                 </select>
-                <select style="width: 300px" id="inputState" class="form-select border border-primary chosen-select"
-                    >
+                <select style="width: 300px;" name="place" id="inputState"
+                    class="form-select border border-primary chosen-select">
+                    <option selected disabled>Which district</option>
                     @foreach ($v as $viloyat)
                         <optgroup label="{{ $viloyat->name_uz }}">
                             @foreach ($viloyat->tumanlari as $tuman)
@@ -62,68 +65,80 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="exampleModal_{{ $work->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $work->title }}</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6>{{ $work->description }}</h6>
+                                <hr>
+                                <div class="d-flex mt-2">
+                                    <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/user.ico') }}"
+                                        alt="">
+                                    <a href="" class="link-underline-light">{{ $work->user->name }} :
+                                        owner</a>
+                                </div>
+                                <hr>
+                                <div class="d-flex mt-2">
+                                    <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/kalendar.ico') }}"
+                                        alt="">
+                                    <h6>{{ $work->date }}</h6>
+                                </div>
+                                <div class="d-flex mt-2">
+                                    <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/kasb.ico') }}"
+                                        alt="">
+                                    <h6>{{ $work->jobrel->name }}</h6>
+                                </div>
+                                <div class="d-flex mt-2">
+                                    <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/tuman.ico') }}"
+                                        alt="">
+                                    <h6>{{ $work->tuman->name_uz }}</h6>
+                                </div>
+                                <div class="d-flex text-center mt-2">
+                                    <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/users.ico') }}"
+                                        alt="">
+                                    <h6>{{ $work->workers }} ta odam
+                                    </h6>
+                                </div>
+                                <div class="d-flex text-center mt-2">
+                                    <img style="width: 25px; margin-right: 5px"
+                                        src="{{ asset('icons/workers_price.ico') }}" alt="">
+                                    <h6>{{ $work->price }} so'm</h6>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                                <form action="" method="">
+                                    <button class="btn btn-primary">Qo'shilish</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </div>
         {{-- </div> --}}
 
-        @foreach ($works as $work)
-            <div class="modal fade" id="exampleModal_{{ $work->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $work->title }}</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h6>{{ $work->description }}</h6>
-                            <hr>
-                            <div class="d-flex mt-2">
-                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/user.ico') }}"
-                                    alt="">
-                                <a href="" class="link-underline-light">{{ $work->user->name }} :
-                                    owner</a>
-                            </div>
-                            <hr>
-                            <div class="d-flex mt-2">
-                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/kalendar.ico') }}"
-                                    alt="">
-                                <h6>{{ $work->date }}</h6>
-                            </div>
-                            <div class="d-flex mt-2">
-                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/kasb.ico') }}"
-                                    alt="">
-                                <h6>{{ $work->job}}</h6>
-                            </div>
-                            <div class="d-flex mt-2">
-                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/tuman.ico') }}"
-                                    alt="">
-                                <h6>{{ $work->tuman->name_uz }}</h6>
-                            </div>
-                            <div class="d-flex text-center mt-2">
-                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/users.ico') }}"
-                                    alt="">
-                                <h6>{{ $work->workers }} ta odam
-                                </h6>
-                            </div>
-                            <div class="d-flex text-center mt-2">
-                                <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/workers_price.ico') }}"
-                                    alt="">
-                                <h6>{{ $work->price }} so'm</h6>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
-                            <form action="" method="">
-                                <button class="btn btn-primary">Qo'shilish</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
     </div>
+    <style>
+        .chosen-container-single .chosen-single div b {
+            display: block !important;
+            opacity: 0 !important;
+        }
 
+        .chosen-container-single .chosen-single {
+            background-color: white !important;
+            border-color: blue !important;
+            margin-right: 15px;
+            height: 10px !important;
+        }
+    </style>
 
 @endsection
 

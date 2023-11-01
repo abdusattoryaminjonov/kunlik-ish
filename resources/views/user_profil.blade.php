@@ -347,7 +347,7 @@
                                         name="password">
                                 </div>
                                 <hr>
-                                <button class="btn btn-info">Change</button>
+                                <button type="submit" class="btn btn-info">Change</button>
                             </form>
                         </div>
                         <div class="tab-pane" id="notification">
@@ -427,12 +427,15 @@
                                 <div class="form-group mb-0">
                                     <label class="d-block">Payment History</label>
                                     <div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
-                                        <div >
+                                        <div class="overflow-auto row" style="height: 300px">
+
                                             @foreach ($works as $work)
                                                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                                                     <div class="card border-0 bg-light rounded shadow">
                                                         <div class="card-body p-4">
-                                                            <h5>{{ $work->title }}</h5>
+                                                            <div style="height: 50px">
+                                                                <h6>{{ $work->title }}</h6>
+                                                            </div>
                                                             <div class="mt-3">
                                                                 <h3 style="color: rgb(72, 135, 21)">
                                                                     {{ $work->price }} so'm</h3>
@@ -443,7 +446,7 @@
                                                                         aria-hidden="true"></i>{{ $work->tuman->name_uz }}</span>
                                                             </div>
                                                             <div class="mt-3">
-                                                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                                     data-bs-target="#exampleModal_{{ $work->id }}">
                                                                     To'liq ko'rish
                                                                 </button>
@@ -456,10 +459,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach
-                                            {{-- </div> --}}
 
-                                            @foreach ($works as $work)
                                                 <div class="modal fade" id="exampleModal_{{ $work->id }}"
                                                     tabindex="-1" aria-labelledby="exampleModalLabel"
                                                     aria-hidden="true">
@@ -494,7 +494,7 @@
                                                                     <img style="width: 25px; margin-right: 5px"
                                                                         src="{{ asset('icons/kasb.ico') }}"
                                                                         alt="">
-                                                                    <h6>{{ $work->job }}</h6>
+                                                                    <h6>{{ $work->jobrel->name}}</h6>
                                                                 </div>
                                                                 <div class="d-flex mt-2">
                                                                     <img style="width: 25px; margin-right: 5px"

@@ -11,16 +11,16 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('works', function (Blueprint $table) {
-            $table->id();                                   // id
-            $table->foreignId('user_id')->constrained();    // user id 
-            $table->string('title');                        // sarlavha
-            $table->string('description');                  // to'liq malumot
-            $table->integer('place');                       // joyi
-            $table->date('date');                           // ish sanasi
-            $table->string('job');                          // kasb
-            $table->integer('workers');                     // odam soni
-            $table->double('price');                        // narxi
-            $table->integer('agreeables');                  // rozi bo'lganlar
+            $table->id(); // id
+            $table->foreignId('user_id')->constrained(); // user id 
+            $table->string('title'); // sarlavha
+            $table->string('description'); // to'liq malumot
+            $table->integer('place'); // joyi
+            $table->date('date'); // ish sanasi
+            $table->foreignId('job')->constrained(); // kasb
+            $table->integer('workers'); // odam soni
+            $table->double('price'); // narxi
+            $table->integer('agreeables'); // rozi bo'lganlar
             $table->timestamps();
         });
     }

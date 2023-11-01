@@ -34,7 +34,7 @@ class Work extends Model
     {
         return $this->belongsTo(Tuman::class, 'place');
     }
-    public function job()
+    public function jobrel()
     {
         return $this->belongsTo(Job::class, 'job');
     }

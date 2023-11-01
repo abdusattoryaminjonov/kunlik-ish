@@ -26,7 +26,7 @@ use App\Http\Controllers\DavomatController;
 |
 */
 Route::get('/home', [WorkController::class, 'index']);
-Route::get('/search', [WorkController::class,'searchWorks'])->name('search');
+Route::post('/search', [WorkController::class, 'searchWorks'])->name('search');
 
 Route::get('/', function () {
     $posts = Post::where('user_id', auth()->id())->get();
@@ -88,7 +88,7 @@ Route::get('/m', function () {
     return view('menu');
 });
 
-Route::post('/search', [WorkController::class, '']);
+// Route::post('/search', [WorkController::class, '']);
 
 Route::get('/profil', function () {
     $works = Work::where('user_id', auth()->id())->get();

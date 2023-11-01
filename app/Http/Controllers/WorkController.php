@@ -14,7 +14,7 @@ class WorkController extends Controller
     {
         $jobs = Job::orderBy('name')->get();
         $v = Viloyat::with('tumanlari')->get();
-        $works = Work::with('tuman', 'job')->get();
+        $works = Work::with('tuman', 'jobrel')->get();
         return view('home', compact('v', 'jobs', 'works'));
     }
     public function createWork(Request $request)
@@ -45,16 +45,37 @@ class WorkController extends Controller
     {
         // Get the search value from the request
         $searchJob = $request->input('job');
-        //$searchPlace = $request->input('place');
+        $searchPlace = $request->input('place');
 
         // Search in the title and body columns from the posts table
-        $works = Work::query()
-            ->where('job', 'LIKE', "%{$searchJob}%")
-            //->orWhere('place', 'LIKE', "%{$searchPlace}%")
-            ->get();
+        if ($searchJob != 0 and $searchPlace != 0) {
 
-        // Return the search view with the resluts compacted
-        return view('searchJob', compact('works'));
+            $works = Work::query()
+                ->where('job', $searchJob)
+                ->where('place', $searchPlace)
+                ->get();
+            $jobs = Job::orderBy('name')->get();
+            $v = Viloyat::with('tumanlari')->get();
+            $works = Work::with('tuman', 'jobrel')->get();
+            return view('home', compact('v', 'jobs', 'works'));
+        } elseif ($searchJob != 0) {
+            $works = Work::query()
+                ->where('job', $searchJob)
+                ->get();
+            $jobs = Job::orderBy('name')->get();
+            $v = Viloyat::with('tumanlari')->get();
+            $works = Work::with('tuman', 'jobrel')->get();
+            return view('home', compact('v', 'jobs', 'works'));
+        } elseif ($searchPlace != 0) {
+            $works = Work::query()
+                ->where('place', $searchPlace)
+                ->get();
+            $jobs = Job::orderBy('name')->get();
+            $v = Viloyat::with('tumanlari')->get();
+            $works = Work::with('tuman', 'jobrel')->get();
+            return view('home', compact('v', 'jobs', 'works'));
+        }
+        return redirect('home');
     }
 
 }
