@@ -100,6 +100,8 @@ Route::get('/profil', function () {
 
 Route::put('/edit-user-data', [UserController::class, 'editUser'])->name('edit_user');
 Route::put('/change-password', [UserController::class, 'changePassword'])->name('change_password');
+Route::put('/edit-user-post/{work}', [WorkController::class,'editWork'])->name('edit_user_post');
+Route::delete('/delete-user-post/{work}', [WorkController::class,'deleteWork'])->name('delete_user_post');
 
 
 Route::post('/job-create', [JobController::class, 'createJob'])->name('job.add');

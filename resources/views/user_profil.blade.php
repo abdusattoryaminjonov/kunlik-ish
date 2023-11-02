@@ -8,14 +8,14 @@
             <div>
                 <label style="color: white">Hello!</label>
             </div>
-            <div id="mark">
+            <div>
                 <img style="width:20px" src="{{ asset('icons/star.ico') }}">
                 <img style="width:20px" src="{{ asset('icons/star.ico') }}">
                 <img style="width:20px" src="{{ asset('icons/star.ico') }}">
                 <img style="width:20px" src="{{ asset('icons/star.ico') }}">
                 <img style="width:20px" src="{{ asset('icons/star_b.ico') }}">
             </div>
-            <label for="mark" style="color: white">4.2 score</label>
+            <label style="color: white">4.2 score</label>
         </div>
     </div>
 
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8" style="width: 900px">
                 <div class="card">
                     <div class="card-header border-bottom mb-3 d-flex d-md-none">
                         <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
@@ -113,7 +113,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="card-body tab-content">
+                    <div class="card-body card-uzunligi tab-content">
                         <div class="tab-pane active" id="profile">
                             <h4>{{ auth()->user()->name }} {{ auth()->user()->surname }}</h4>
                             <hr>
@@ -150,9 +150,8 @@
                                         placeholder="Enter your website age" value="{{ auth()->user()->age }}">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="location">Location</label>
-                                    <select id="inputState" id="location"
-                                        class="form-select border border-primary chosen-select"
+                                    <label>Location</label>
+                                    <select id="inputState" class="form-select border border-primary chosen-select"
                                         style="border-color: #97a7c0 !important;" name="place">
                                         @foreach ($v as $viloyat)
                                             <optgroup label="{{ $viloyat->name_uz }}">
@@ -319,7 +318,7 @@
                                                 <div class="col-sm-10 input-group" style="width: 200px">
                                                     <span class="input-group-text">
                                                         <img style="width: 25px !important"
-                                                            src="{{ asset('icons/price.ico') }}">
+                                                            src="{{ asset('icons/calendar.ico') }}">
                                                     </span>
                                                     <input style="border-color: #97a7c0" type="date" name="date"
                                                         class="form-control">
@@ -416,121 +415,257 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="billing">
-                            <h6>BILLING SETTINGS</h6>
+                            <h3>Ishlar</h3>
                             <hr>
-                            <form>
-                                <div class="form-group">
-                                    <label class="d-block mb-0">Payment Method</label>
-                                    <div class="small text-muted mb-3">You have not added a payment method</div>
-                                    <button class="btn btn-info" type="button">Add Payment Method</button>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <label class="d-block">Payment History</label>
-                                    <div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
-                                        <div class="overflow-auto row" style="height: 300px">
+                            <div class="form-group mb-0">
+                                <div class="border border-gray-500 bg-gray-200 p-3  font-size-sm">
+                                    <div class="overflow-auto row" style="height: 500px">
 
-                                            @foreach ($works as $work)
-                                                <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                                                    <div class="card border-0 bg-light rounded shadow">
-                                                        <div class="card-body p-4">
-                                                            <div style="height: 50px">
-                                                                <h6>{{ $work->title }}</h6>
-                                                            </div>
-                                                            <div class="mt-3">
-                                                                <h3 style="color: rgb(72, 135, 21)">
-                                                                    {{ $work->price }} so'm</h3>
-                                                                <h5>{{ $work->date }}</h5>
-                                                                <hr>
-                                                                <span class="text-muted d-block"><i
-                                                                        class="fa fa-map-marker"
-                                                                        aria-hidden="true"></i>{{ $work->tuman->name_uz }}</span>
-                                                            </div>
-                                                            <div class="mt-3">
-                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal_{{ $work->id }}">
-                                                                    To'liq ko'rish
-                                                                </button>
-                                                            </div>
-                                                            <div class="mt-3 d-flex">
-                                                                <p>created in :</p>
-                                                                <label
-                                                                    style="margin-left: 5px">{{ $work->created_at->format('Y-m-d') }}</label>
+                                        @foreach ($works as $work)
+                                            <div class="col-lg-6 col-md-6 col-12 mt-4">
+                                                <div class="card border-0 bg-light rounded shadow " style="width: 350px">
+                                                    <div class="card-body p-4">
+                                                        <div>
+                                                            <h6 style="color: blue">{{ $work->title }}</h6>
+                                                            <div style="height: 100px">
+                                                                <h6>{{ $work->description }}</h6>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="modal fade" id="exampleModal_{{ $work->id }}"
-                                                    tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                    {{ $work->title }}</h1>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <div class="mt-2">
+                                                            <h5 style="color: rgb(14, 0, 121)">
+                                                                {{ $work->tuman->name_uz }}</h5>
+                                                            <div class="mt-1 d-flex">
+                                                                <label style="margin-right: 3px">Ish kuni:</label>
+                                                                <h6>{{ $work->date }}</h6>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <h6>{{ $work->description }}</h6>
-                                                                <hr>
-                                                                <div class="d-flex mt-2">
-                                                                    <img style="width: 25px; margin-right: 5px"
-                                                                        src="{{ asset('icons/user.ico') }}"
-                                                                        alt="">
-                                                                    <a href=""
-                                                                        class="link-underline-light">{{ $work->user->name }}
-                                                                        :
-                                                                        owner</a>
-                                                                </div>
-                                                                <hr>
-                                                                <div class="d-flex mt-2">
-                                                                    <img style="width: 25px; margin-right: 5px"
-                                                                        src="{{ asset('icons/kalendar.ico') }}"
-                                                                        alt="">
-                                                                    <h6>{{ $work->date }}</h6>
-                                                                </div>
-                                                                <div class="d-flex mt-2">
-                                                                    <img style="width: 25px; margin-right: 5px"
-                                                                        src="{{ asset('icons/kasb.ico') }}"
-                                                                        alt="">
-                                                                    <h6>{{ $work->jobrel->name}}</h6>
-                                                                </div>
-                                                                <div class="d-flex mt-2">
-                                                                    <img style="width: 25px; margin-right: 5px"
-                                                                        src="{{ asset('icons/tuman.ico') }}"
-                                                                        alt="">
-                                                                    <h6>{{ $work->tuman->name_uz }}</h6>
-                                                                </div>
-                                                                <div class="d-flex text-center mt-2">
-                                                                    <img style="width: 25px; margin-right: 5px"
-                                                                        src="{{ asset('icons/users.ico') }}"
-                                                                        alt="">
-                                                                    <h6>{{ $work->workers }} ta odam
-                                                                    </h6>
-                                                                </div>
-                                                                <div class="d-flex text-center mt-2">
-                                                                    <img style="width: 25px; margin-right: 5px"
-                                                                        src="{{ asset('icons/workers_price.ico') }}"
-                                                                        alt="">
-                                                                    <h6>{{ $work->price }} so'm</h6>
-                                                                </div>
+                                                            <div class="mt-1 d-flex">
+                                                                <label style="margin-right: 3px">Kasbi:</label>
+                                                                <h6>{{ $work->jobrel->name }}</h6>
                                                             </div>
+                                                            <div class="mt-1 d-flex">
+                                                                <label style="margin-right: 3px">Odam soni:</label>
+                                                                <h6>{{ $work->workers }}</h6>
+                                                            </div>
+                                                            <hr>
+                                                            <h5 style="color: rgb(72, 135, 21)">
+                                                                {{ $work->price }} so'm</h5>
+                                                        </div>
+                                                        <div class="mt-1 d-flex">
+                                                            <p>created in :</p>
+                                                            <label
+                                                                style="margin-left: 5px">{{ $work->created_at->format('Y-m-d') }}</label>
+                                                        </div>
+                                                        <div class="mt-3">
                                                             <div class="modal-footer">
-                                                                <button class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Yopish</button>
-                                                                <form action="" method="">
-                                                                    <button class="btn btn-primary">Qo'shilish</button>
+                                                                <button class="btn btn-primary btn-sm"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#user_{{ $work->id }}"
+                                                                    style=" margin: 5px"><img style="width: 25px;"
+                                                                        src="{{ asset('icons/users_oq.ico') }}"></button>
+                                                                <button class="btn btn-primary btn-sm"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#exampleModal_{{ $work->id }}"
+                                                                    style=" margin: 5px"><img style="width: 25px;"
+                                                                        src="{{ asset('icons/edit_oq.ico') }}"></button>
+                                                                <form
+                                                                    action="{{ route('delete_user_post', ['work' => $work->id]) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="btn btn-primary btn-sm"
+                                                                        style=" margin: 5px"><img style="width: 25px;"
+                                                                            src="{{ asset('icons/trash_oq.ico') }}"></button>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach
-                                        </div>
+                                            </div>
+
+                                            <div class="modal fade" id="exampleModal_{{ $work->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-body">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    Postni
+                                                                    o'zgartirish</h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+
+                                                            <form
+                                                                action="{{ route('edit_user_post', ['work' => $work->id]) }}"
+                                                                method="POST">
+                                                                <div class="d-flex">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div style="margin: 15px">
+                                                                        <div class="d-flex">
+                                                                            <label>Sarlavha </label>
+                                                                            <p style="color: red">* Muxim</p>
+                                                                        </div>
+                                                                        <div class="col-sm-10 input-group"
+                                                                            style="width: 415px">
+                                                                            <span class="input-group-text">
+                                                                                <img style="width: 20px !important"
+                                                                                    src="{{ asset('icons/title.ico') }}">
+                                                                            </span>
+                                                                            <input style="border-color: #97a7c0"
+                                                                                type="text" id="icon"
+                                                                                class="form-control"
+                                                                                value="{{ $work->title }}"
+                                                                                name="title">
+                                                                        </div>
+                                                                        <div class="d-flex mt-3">
+                                                                            <label>Manzil </label>
+                                                                            <p style="color: red">* Muxim</p>
+                                                                        </div>
+                                                                        <div class="col-sm-10 input-group "
+                                                                            style="width: 415px">
+                                                                            <span class="input-group-text">
+                                                                                <img style="width: 20px !important"
+                                                                                    src="{{ asset('icons/location.ico') }}">
+                                                                            </span>
+                                                                            <select id="inputState" id="location"
+                                                                                class="form-select border border-primary chosen-select"
+                                                                                style="border-color: #97a7c0 !important;"
+                                                                                name="place">
+                                                                                @foreach ($v as $viloyat)
+                                                                                    <optgroup
+                                                                                        label="{{ $viloyat->name_uz }}">
+                                                                                        @foreach ($viloyat->tumanlari as $tuman)
+                                                                                            <option
+                                                                                                value="{{ $tuman->id }}"
+                                                                                                {{ $work->place == $tuman->id ? 'selected' : '' }}>
+                                                                                                {{ $tuman->name_uz }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </optgroup>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="d-flex">
+                                                                            <div>
+                                                                                <div class="d-flex mt-3">
+                                                                                    <label>Ishchilar soni </label>
+                                                                                    <p style="color: red">* Muxim</p>
+                                                                                </div>
+                                                                                <div class="col-sm-10 input-group"
+                                                                                    style="width: 200px">
+                                                                                    <span class="input-group-text">
+                                                                                        <img style="width: 25px !important"
+                                                                                            src="{{ asset('icons/workers.ico') }}">
+                                                                                    </span>
+                                                                                    <input style="border-color: #97a7c0"
+                                                                                        type="number"
+                                                                                        value="{{ $work->workers }}"
+                                                                                        name="workers"
+                                                                                        class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div style="margin-left: 15px">
+                                                                                <div class="d-flex mt-3">
+                                                                                    <label>Ish xaqqi </label>
+                                                                                    <p style="color: red">* Muxim</p>
+                                                                                </div>
+                                                                                <div class="col-sm-10 input-group"
+                                                                                    style="width: 200px">
+                                                                                    <span class="input-group-text">
+                                                                                        <img style="width: 25px !important"
+                                                                                            src="{{ asset('icons/price.ico') }}">
+                                                                                    </span>
+                                                                                    <input style="border-color: #97a7c0"
+                                                                                        type="number"
+                                                                                        value="{{ $work->price }}"
+                                                                                        name="price"
+                                                                                        class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="d-flex mt-3">
+                                                                                <label>Ish kuni </label>
+                                                                                <p style="color: red">* Muxim</p>
+                                                                            </div>
+                                                                            <div class="col-sm-10 input-group"
+                                                                                style="width: 200px">
+                                                                                <span class="input-group-text">
+                                                                                    <img style="width: 25px !important"
+                                                                                        src="{{ asset('icons/calendar.ico') }}">
+                                                                                </span>
+                                                                                <input style="border-color: #97a7c0"
+                                                                                    type="date" name="date"
+                                                                                    value="{{ $work->date }}"
+                                                                                    class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="margin: 15px">
+                                                                        <div class="d-flex">
+                                                                            <label>To'liq ma'lumot </label>
+                                                                            <p style="color: red">* Muxim</p>
+                                                                        </div>
+                                                                        <div class="col-sm-10 input-group"
+                                                                            style="width: 415px;">
+                                                                            <span class="input-group-text">
+                                                                                <img style="width: 20px !important"
+                                                                                    src="{{ asset('icons/description.ico') }}">
+                                                                            </span>
+                                                                            <textarea style="border-color: #97a7c0; height: 135px" class="form-control" name="description">{{ $work->description }}</textarea>
+                                                                        </div>
+                                                                        <div class="d-flex mt-3">
+                                                                            <label>Kasbi </label>
+                                                                            <p style="color: red">* Muxim</p>
+                                                                        </div>
+                                                                        <div class="col-sm-10 input-group "
+                                                                            style="width: 415px">
+                                                                            <span class="input-group-text">
+                                                                                <img style="width: 20px !important"
+                                                                                    src="{{ asset('icons/job.ico') }}">
+                                                                            </span>
+                                                                            <select id="inputState"
+                                                                                class="form-select border border-primary chosen-select"
+                                                                                style="border-color: #97a7c0 !important;"
+                                                                                name="job">
+                                                                                @foreach ($jobs as $job)
+                                                                                    <option value="{{ $job->id }}"
+                                                                                        {{ $work->job == $job->id ? 'selected' : '' }}>
+                                                                                        {{ $job->name }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="d-flex flex-row-reverse">
+                                                                            <button style="margin-top: 50px;"
+                                                                                class="btn btn-primary">Saqlash</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal fade" id="user_{{ $work->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="d-flex text-center mt-2">
+                                                            <img style="width: 25px; margin-right: 5px"
+                                                                src="{{ asset('icons/users.ico') }}" alt="">
+                                                            <h6>{{ $work->workers }} ta odam
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -538,4 +673,14 @@
         </div>
 
     </div>
+    <style>
+        .modal-content {
+            width: 900px !important;
+            height: 445px;
+        }
+
+        .modal-dialog {
+            margin-left: 20% !important;
+        }
+    </style>
 @endsection
