@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Job;
 use App\Models\User;
+use App\Models\Viloyat;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Auth;
 
 class UserController extends Controller
 {
@@ -65,6 +66,14 @@ class UserController extends Controller
       $user->save();
       return redirect('profil');
    }
+
+   public function showUser(int $id)
+   {
+      $user = User::find($id);
+      //$jobs = Job::orderBy('name')->get();
+      return view('show_user', compact('user'));
+   }
+
 
    public function createJob(Request $request)
    {

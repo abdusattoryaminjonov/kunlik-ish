@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phonenumber');
             $table->string('password');
-            $table->float('mark');
+            $table->integer('users_ball')->nullable();
+            $table->integer('users_ball_count')->nullable();
             $table->integer('place');
             $table->rememberToken();
             $table->timestamps();

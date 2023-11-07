@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->foreignId('job')->constrained(); // kasb
             $table->integer('workers'); // odam soni
             $table->double('price'); // narxi
-            $table->integer('agreeables'); // rozi bo'lganlar
+            // $table->json('agreeables'); // rozi bo'lganlar
             $table->timestamps();
         });
     }

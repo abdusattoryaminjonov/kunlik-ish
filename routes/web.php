@@ -2,7 +2,6 @@
 
 use App\Models\Job;
 use App\Models\Post;
-use App\Models\Type;
 use App\Models\User;
 use App\Models\Work;
 use App\Models\Davomat;
@@ -27,6 +26,7 @@ use App\Http\Controllers\DavomatController;
 */
 Route::get('/home', [WorkController::class, 'index']);
 Route::post('/search', [WorkController::class, 'searchWorks'])->name('search');
+Route::post('/user-add-in-work/{user}', [WorkController::class, 'userINWork'])->name('userInWork');
 
 Route::get('/', function () {
     $posts = Post::where('user_id', auth()->id())->get();
@@ -91,7 +91,7 @@ Route::get('/m', function () {
 // Route::post('/search', [WorkController::class, '']);
 
 Route::get('/profil', function () {
-    $works = Work::where('user_id', auth()->id())->get();
+    $works = Work::with('jobrel')->where('user_id', auth()->id())->get();
     $jobs = Job::orderBy('name')->get();
     $v = Viloyat::with('tumanlari')->get();
     // $v = Viloyat::all();
@@ -100,8 +100,10 @@ Route::get('/profil', function () {
 
 Route::put('/edit-user-data', [UserController::class, 'editUser'])->name('edit_user');
 Route::put('/change-password', [UserController::class, 'changePassword'])->name('change_password');
-Route::put('/edit-user-post/{work}', [WorkController::class,'editWork'])->name('edit_user_post');
-Route::delete('/delete-user-post/{work}', [WorkController::class,'deleteWork'])->name('delete_user_post');
+Route::put('/edit-user-post/{work}', [WorkController::class, 'editWork'])->name('edit_user_post');
+Route::delete('/delete-user-post/{work}', [WorkController::class, 'deleteWork'])->name('delete_user_post');
+Route::get('/show-user/{user}', [UserController::class, 'showUser'])->name('showUser');
+
 
 
 Route::post('/job-create', [JobController::class, 'createJob'])->name('job.add');
@@ -112,4 +114,5 @@ Route::post('/create-job', [UserController::class, 'createJob'])->name('user.job
 Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob'])->name('user.delete.job');
 
 Route::post('/create-work', [WorkController::class, 'createWork'])->name('user.work.create');
+Route::get('/send-notification', [WorkController::class, 'sendNotification'])->name('notification');
 

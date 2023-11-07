@@ -46,13 +46,22 @@
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                                 </svg>Security
                             </a>
-                            <a href="#notification" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                            <a href="#notification" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded  ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-bell mr-2">
+                                    stroke-linejoin="round" class="position-relative feather feather-bell mr-2">
                                     <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                                     <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                </svg>Notification
+                                </svg>
+                                <label class="position-relative">
+
+                                    Notification
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        99+
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                </label>
                             </a>
 
                         </nav>

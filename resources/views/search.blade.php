@@ -44,7 +44,9 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card border-0 bg-light rounded shadow">
                         <div class="card-body p-4">
-                            <h5>{{ $work->title }}</h5>
+                            <div style="height: 60px">
+                                <h5>{{ $work->title }}</h5>
+                            </div>
                             <div class="mt-3">
                                 <h3 style="color: rgb(72, 135, 21)">{{ $work->price }} so'm</h3>
                                 <h5>{{ $work->date }}</h5>
@@ -71,7 +73,8 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $work->title }}</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    {{ $work->title }}</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -123,8 +126,9 @@
                 </div>
             @endforeach
         </div>
-        {{-- </div> --}}
-
+        <div>
+            {{ $works->links() }}
+        </div>
     </div>
     <style>
         .chosen-container-single .chosen-single div b {

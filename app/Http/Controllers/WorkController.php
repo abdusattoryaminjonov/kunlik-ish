@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use App\Models\Viloyat;
+use App\Models\User;
 use App\Models\Work;
+use App\Models\Viloyat;
+use App\Notifications\Jo_apply;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -14,20 +16,20 @@ class WorkController extends Controller
     {
         $jobs = Job::orderBy('name')->get();
         $v = Viloyat::with('tumanlari')->get();
-        $works = Work::with('tuman', 'jobrel')->get();
+        $works = Work::popular()->with('tuman', 'jobrel')->orderByDesc('date')->paginate(6); //->get();
         return view('home', compact('v', 'jobs', 'works'));
     }
     public function createWork(Request $request)
     {
         $incomingFields = $request->validate([
             'title' => 'required|string|min:8',
-            'description' => 'required',
-            'place' => 'required',
-            'date' => 'required',
+            'description' => 'required|string',
+            'place' => 'required|int',
+            'date' => 'required|date',
             'job' => 'required',
             'workers' => 'required',
             'price' => 'required',
-            'agreeables' => ['nullable']
+            'agreeables' => 'nullable|array'
 
         ]);
         $incomingFields['title'] = strip_tags($incomingFields['title']);
@@ -70,41 +72,44 @@ class WorkController extends Controller
     public function searchWorks(Request $request)
     {
         // Get the search value from the request
-        $searchJob = $request->input('job');
-        $searchPlace = $request->input('place');
+        $searchJob = $request->input('job', 0);
+        $searchPlace = $request->input('place', 0);
 
-        // Search in the title and body columns from the posts table
-        if ($searchJob != 0 and $searchPlace != 0) {
+        $works = Work::query();
+        $jobs = Job::orderBy('name')->get();
+        $v = Viloyat::with('tumanlari')->get();
 
-            $works = Work::query()
-                ->where('job', $searchJob)
-                ->where('place', $searchPlace)
-                ->get();
-            $jobs = Job::orderBy('name')->get();
-            $v = Viloyat::with('tumanlari')->get();
-            $works = Work::with('tuman', 'jobrel')->get();
-            return view('search', compact('v', 'jobs', 'works'));
-        } elseif ($searchJob != 0) {
-            $works = Work::query()
-                ->where('job', $searchJob)
-                ->get();
-            $jobs = Job::orderBy('name')->get();
-            $v = Viloyat::with('tumanlari')->get();
-            $works = Work::with('tuman', 'jobrel')->get();
-            return view('search', compact('v', 'jobs', 'works'));
-        } elseif ($searchPlace != 0) {
-            $works = Work::query()
-                ->where('place', $searchPlace)
-                ->get();
-            $jobs = Job::orderBy('name')->get();
-            $v = Viloyat::with('tumanlari')->get();
-            $works = Work::with('tuman', 'jobrel')->get();
-            return view('search', compact('v', 'jobs', 'works'));
+        if ($searchJob !== 0) {
+            $works = $works->where('job', $searchJob);
         }
-        return redirect('home');
+
+        if ($searchPlace !== 0) {
+            $works = $works->where('place', $searchPlace);
+        }
+        $works = $works->with('tuman', 'jobrel')->orderByDesc('id')->paginate(6);
+        return view('search', compact('v', 'jobs', 'works'));
     }
+
+    public function userINWork(Request $request, User $user)
+    {
+        // $workersNotif = [
+        //     'body' => 'Yangi habar',
+        //     'userdata' => '',
+        //     'url' => url('/profil'),
+        //     'raxmat' => 'Senda 14kun bor'
+        // ];
+
+        auth()->user()->works()->attach($request->input('work_id'), ['status' => 0]);
+        //$user->notify(new Jo_apply($workersNotif));
+        return redirect('/home');
+    }
+
+
+
+
     public function deleteWork(Work $work)
     {
+
         if (auth()->user()->id === $work['user_id']) {
             $work->delete();
         }

@@ -44,22 +44,27 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card border-0 bg-light rounded shadow">
                         <div class="card-body p-4">
-                            <h5>{{ $work->title }}</h5>
-                            <div class="mt-3">
-                                <h3 style="color: rgb(72, 135, 21)">{{ $work->price }} so'm</h3>
-                                <h5>{{ $work->date }}</h5>
-                                <hr>
-                                <span class="text-muted d-block"><i class="fa fa-map-marker"
-                                        aria-hidden="true"></i>{{ $work->tuman->name_uz }}</span>
+                            <div style="height: 60px">
+                                <h5>{{ $work->title }}</h5>
                             </div>
                             <div class="mt-3">
+                                <h3 style="color: rgb(72, 135, 21)"><i class="fa-solid fa-sack-dollar"
+                                        style="margin-right: 3px"></i>{{ $work->price }} so'm</h3>
+                                <h5><i class="fa-solid fa-calendar-days" style="margin-right: 3px"></i>{{ $work->date }}
+                                </h5>
+                                <hr>
+                                <span class="text-muted d-block">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    {{ $work->tuman->name_uz }}</span>
+                            </div>
+                            <div class="mt-3 d-flex " style="justify-content: flex-end;">
                                 <button class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal_{{ $work->id }}">
                                     To'liq ko'rish
                                 </button>
                             </div>
                             <div class="mt-3 d-flex">
-                                <p>created in :</p>
+                                <p>Created at :</p>
                                 <label style="margin-left: 5px">{{ $work->created_at->format('Y-m-d') }}</label>
                             </div>
                         </div>
@@ -81,7 +86,8 @@
                                 <div class="d-flex mt-2">
                                     <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/user.ico') }}"
                                         alt="">
-                                    <a href="" class="link-underline-light">{{ $work->user->name }} :
+                                    <a href="{{ route('showUser', ['user' => $work->user->id]) }}"
+                                        class="link-underline-light">{{ $work->user->name }} :
                                         owner</a>
                                 </div>
                                 <hr>
@@ -113,9 +119,12 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
-                                <form action="" method="">
-                                    <button class="btn btn-primary">Qo'shilish</button>
+                                <label>Ishga qo'shiling -> </label>
+                                <form action="{{ route('userInWork', ['user' => auth()->user()->id]) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{ $work->id }}" name="work_id">
+                                    {{-- @if (count($work->user)) --}}
+                                    <button type="submit" class="btn btn-primary" id="liveToastBtn">click</button>
                                 </form>
                             </div>
                         </div>
@@ -123,25 +132,23 @@
                 </div>
             @endforeach
         </div>
-
+        <div>
+            {{ $works->links() }}
+        </div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Hello, world! This is a toast message.
+                </div>
+            </div>
+        </div>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
     <style>
         .chosen-container-single .chosen-single div b {
             display: block !important;
@@ -153,6 +160,11 @@
             border-color: blue !important;
             margin-right: 15px;
             height: 10px !important;
+        }
+
+        .d-sm-flex {
+            margin-top: 30px;
+            flex-direction: column;
         }
     </style>
 
