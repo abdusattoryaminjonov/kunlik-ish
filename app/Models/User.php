@@ -69,6 +69,9 @@ class User extends Authenticatable
     public function works(){
         return $this->belongsToMany(Work::class, 'user_work', 'user_id', 'work_id');
     }
+    public function comments(){
+        
+    }
 
 
     public function tuman()

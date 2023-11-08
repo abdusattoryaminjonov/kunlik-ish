@@ -64,3 +64,22 @@
     font-size: 20px;
     color: #0d6efd;
 }
+.fa-solidU{
+    font-size: 20px;
+    color: #97989b;
+}
+.rating-box{
+    width: 500px;
+    position: relative;
+    background:#fff;
+    padding: 20px 30px 25px;
+    margin-bottom: -30px;
+    border-radius: 5px;
+    box-shadow: -8px 14px 19px -8px rgba(85, 93, 232, 0.77);
+    -webkit-box-shadow: -8px 14px 19px -8px rgba(85, 93, 232, 0.77);
+    -moz-box-shadow: -8px 14px 19px -8px rgba(85, 93, 232, 0.77);
+    color: #0d6efd;
+}
+.faol{
+    color: #d4d437;
+}

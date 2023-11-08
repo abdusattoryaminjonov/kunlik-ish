@@ -1,21 +1,53 @@
 @extends('layout')
 @section('content')
-    <div class="bg-primary text-center pt-3">
-        <div class="col-md-6 offset-md-3">
+    <div class="bg-primary text-center pt-3 d-flex justify-content-center">
+        <div class="rating-box">
             <div>
-                <h3 style="color: white">{{ auth()->user()->name }} {{ auth()->user()->surname }}</h3>
+                <h3>{{ auth()->user()->name }} {{ auth()->user()->surname }}</h3>
             </div>
             <div>
-                <label style="color: white">Hello!</label>
+                <label>Hello!</label>
             </div>
-            <div>
-                <img style="width:20px" src="{{ asset('icons/star.ico') }}">
-                <img style="width:20px" src="{{ asset('icons/star.ico') }}">
-                <img style="width:20px" src="{{ asset('icons/star.ico') }}">
-                <img style="width:20px" src="{{ asset('icons/star.ico') }}">
-                <img style="width:20px" src="{{ asset('icons/star_b.ico') }}">
+            <div class="stars">
+                @if (auth()->user()->users_ball_count == 0)
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                @elseif(auth()->user()->users_ball_count == 1)
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                @elseif(auth()->user()->users_ball_count == 2)
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                @elseif(auth()->user()->users_ball_count == 3)
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                @elseif(auth()->user()->users_ball_count == 4)
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star"></i>
+                @elseif(auth()->user()->users_ball_count == 5)
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol"></i>
+                @endif
             </div>
-            <label style="color: white">4.2 score</label>
+            <label>{{ auth()->user()->users_ball_count }} score</label>
         </div>
     </div>
 
@@ -74,9 +106,9 @@
                         <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
                             <li class="nav-item">
                                 <a href="#profile" data-toggle="tab" class="nav-link has-icon active"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-user">
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg></a>
@@ -235,6 +267,9 @@
                                                 </span>
                                                 <input style="border-color: #97a7c0" type="text" id="icon"
                                                     class="form-control" name="title">
+                                                @if ($errors->has('title'))
+                                                    <div class="error">{{ $errors->first('title') }}</div>
+                                                @endif
                                             </div>
                                             <div class="d-flex mt-3">
                                                 <label>Manzil </label>
@@ -300,7 +335,7 @@
                                                 <img style="width: 20px !important"
                                                     src="{{ asset('icons/description.ico') }}">
                                             </span>
-                                            <textarea style="border-color: #97a7c0; " class="form-control" name="description"></textarea>
+                                            <textarea id="editor" style="border-color: #97a7c0; " class="form-control" name="description"></textarea>
                                         </div>
                                         <div class="d-flex mt-3">
                                             <label>Kasbi </label>
@@ -437,7 +472,7 @@
                                                         <div>
                                                             <h6 style="color: blue">{{ $work->title }}</h6>
                                                             <div style="height: 100px">
-                                                                <h6>{{ $work->description }}</h6>
+                                                                {!! $work->description !!}
                                                             </div>
                                                         </div>
                                                         <div class="mt-2">
@@ -692,4 +727,17 @@
             margin-left: 20% !important;
         }
     </style>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+    <script>
+        const stars = document.querySelectorAll(".stars i");
+
+        // stars.forEach((star, index1) => {
+        //     star.addEventListener("click", () => {
+        //         stars.forEach((star, index2) => {
+        //             index1 >= index2 ? star.classList.add("faol") : star.classList.remove(
+        //                 "faol");
+        //         });
+        //     });
+        // });
+    </script>
 @endsection

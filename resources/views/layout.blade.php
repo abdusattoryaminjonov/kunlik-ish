@@ -24,7 +24,7 @@
     </script>
     @section('myJs')
     @show
+    <script src="{{ asset('myJs.js') }}" defer></script>
 </body>
-<script src="{{ asset('myJs.js') }}"></script>
 
 </html>

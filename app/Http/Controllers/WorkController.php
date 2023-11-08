@@ -33,7 +33,6 @@ class WorkController extends Controller
 
         ]);
         $incomingFields['title'] = strip_tags($incomingFields['title']);
-        $incomingFields['description'] = strip_tags($incomingFields['description']);
         $incomingFields['place'] = strip_tags($incomingFields['place']);
         $incomingFields['date'] = strip_tags($incomingFields['date']);
         $incomingFields['job'] = strip_tags($incomingFields['job']);
