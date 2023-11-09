@@ -92,6 +92,7 @@ Route::get('/m', function () {
 
 Route::get('/profil', function () {
     $works = Work::with('jobrel')->where('user_id', auth()->id())->get();
+    // dd($works );
     $jobs = Job::orderBy('name')->get();
     $v = Viloyat::with('tumanlari')->get();
     // $v = Viloyat::all();

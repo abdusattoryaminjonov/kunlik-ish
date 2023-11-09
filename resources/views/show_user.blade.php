@@ -96,6 +96,7 @@
         color: white;
     }
 
+
     .pd1 {
         margin-top: 30px;
 
@@ -108,14 +109,5 @@
 
     .card1 {
         border-radius: 0.5em;
-    }
-
-    .data1 {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .data1 p {
-        font-size: 10px;
     }
 </style>
