@@ -62,6 +62,8 @@
 
 .fa-solid {
     font-size: 20px;
+}
+.fa-solid11 {
     color: #0d6efd;
 }
 
@@ -78,7 +80,10 @@
     color: #0d6efd;
 }
 .faol{
-    color: #d4d437;
+    color: #0d6efd !important;
+}
+.marck {
+    color: #0d6efd!important;
 }
 .followers{
     width: 800px;

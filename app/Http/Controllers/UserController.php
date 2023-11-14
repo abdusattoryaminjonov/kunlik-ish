@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Job;
 use App\Models\User;
+use App\Models\Work;
+use App\Models\Report;
 use App\Models\Viloyat;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,6 +14,18 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
 
+
+   public function index()
+   {
+      $works = Work::with('jobrel')->where('user_id', auth()->id())->orderByDesc('id')->get();
+      // dd($works );
+      $jobs = Job::orderBy('name')->get();
+      $v = Viloyat::with('tumanlari')->get();
+      $notf = Report::where('userId', auth()->id())->get()->count();
+      $habarlar = Report::where('userId', auth()->id())->get();
+      // $v = Viloyat::all();
+      return view('user_profil', compact('habarlar', 'jobs', 'v', 'works', 'notf'));
+   }
    function login(Request $request)
    {
       $incomingFields = $request->validate([

@@ -19,7 +19,7 @@
                     <a class="nav-link" href="/show-user">show-user</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link " href="/game">Game</a>
                 </li>
             </ul>
         </div>

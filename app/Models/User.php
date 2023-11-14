@@ -69,6 +69,14 @@ class User extends Authenticatable
     public function works(){
         return $this->belongsToMany(Work::class, 'user_work', 'user_id', 'work_id');
     }
+
+    public function reports_to(){
+        return $this->hasMany(Report::class,'userId','id');
+    }
+    public function reports()
+    {
+        return $this->hasMany(Report::class,'author','id' );
+    }
     public function comments(){
         
     }

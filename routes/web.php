@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ReportController;
 use App\Models\Job;
 use App\Models\Post;
+use App\Models\Report;
 use App\Models\User;
 use App\Models\Work;
 use App\Models\Davomat;
@@ -90,14 +92,7 @@ Route::get('/m', function () {
 
 // Route::post('/search', [WorkController::class, '']);
 
-Route::get('/profil', function () {
-    $works = Work::with('jobrel')->where('user_id', auth()->id())->get();
-    // dd($works );
-    $jobs = Job::orderBy('name')->get();
-    $v = Viloyat::with('tumanlari')->get();
-    // $v = Viloyat::all();
-    return view('user_profil', compact('jobs', 'v', 'works'));
-})->name('profil');
+Route::get('/profil',[UserController::class,'index'])->name('profil');
 
 Route::put('/edit-user-data', [UserController::class, 'editUser'])->name('edit_user');
 Route::put('/change-password', [UserController::class, 'changePassword'])->name('change_password');
@@ -117,3 +112,12 @@ Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob'])->name('
 Route::post('/create-work', [WorkController::class, 'createWork'])->name('user.work.create');
 Route::get('/send-notification', [WorkController::class, 'sendNotification'])->name('notification');
 
+Route::get('/game', function () {
+    return view('game');
+});
+
+Route::post('/report', [ReportController::class, 'store'])->middleware('auth')->name('reportUser');
+
+Route::get('/olmos', function () {
+    return view('home');
+});

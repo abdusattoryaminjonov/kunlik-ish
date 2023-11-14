@@ -48,13 +48,14 @@
                                 <h5>{{ $work->title }}</h5>
                             </div>
                             <div class="mt-3">
-                                <h3 style="color: rgb(72, 135, 21)"><i class="fa-solid fa-sack-dollar"
+                                <h3><i class="fa-solid fa-sack-dollar fa-solid11"
                                         style="margin-right: 3px"></i>{{ $work->price }} so'm</h3>
-                                <h5><i class="fa-solid fa-calendar-days" style="margin-right: 3px"></i>{{ $work->date }}
+                                <h5><i class="fa-solid fa-calendar-days fa-solid11"
+                                        style="margin-right: 3px"></i>{{ $work->date }}
                                 </h5>
                                 <hr>
                                 <span class="text-muted d-block">
-                                    <i class="fa-solid fa-location-dot"></i>
+                                    <i class="fa-solid fa-location-dot fa-solid11"></i>
                                     {{ $work->tuman->name_uz }}</span>
                             </div>
                             <div class="mt-3 d-flex " style="justify-content: flex-end;">
@@ -66,6 +67,12 @@
                             <div class="mt-3 d-flex">
                                 <p>Created at :</p>
                                 <label style="margin-left: 5px">{{ $work->created_at->format('Y-m-d') }}</label>
+                            </div>
+                            <div class="mt-3 d-flex">
+                                <p>
+                                    <i class="fa-solid fa-user" style="font-size: 15px !important; color:#797979"></i>
+                                </p>
+                                <p style="color: #797979;margin-left: 3px;">: 4</p>
                             </div>
                         </div>
                     </div>
@@ -81,7 +88,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <h6>{{ $work->description }}</h6>
+                                <h6>{!! $work->description !!}</h6>
                                 <hr>
                                 <div class="d-flex mt-2">
                                     <img style="width: 25px; margin-right: 5px" src="{{ asset('icons/user.ico') }}"
@@ -148,6 +155,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <style>
         .chosen-container-single .chosen-single div b {

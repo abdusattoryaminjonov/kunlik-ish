@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Http\Requests\StoreReportRequest;
 use App\Http\Requests\UpdateReportRequest;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
@@ -13,7 +14,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -21,15 +22,22 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreReportRequest $request)
+    public function store(Request $request)
     {
-        //
+        // dd($request);
+        $data = $request->all();
+        $data['userId'] = $request['kimga'];
+        $data['author'] = auth()->id();
+        unset($data["_token"]);
+        unset($data["kimga"]);
+        Report::create($data);
+        return redirect('/home');
     }
 
     /**

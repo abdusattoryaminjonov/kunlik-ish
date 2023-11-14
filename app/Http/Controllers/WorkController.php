@@ -16,7 +16,8 @@ class WorkController extends Controller
     {
         $jobs = Job::orderBy('name')->get();
         $v = Viloyat::with('tumanlari')->get();
-        $works = Work::popular()->with('tuman', 'jobrel')->orderByDesc('date')->paginate(6); //->get();
+        $works = Work::with('tuman', 'jobrel')->orderByDesc('date')->paginate(6); //->get();popular()->
+
         return view('home', compact('v', 'jobs', 'works'));
     }
     public function createWork(Request $request)
@@ -86,7 +87,7 @@ class WorkController extends Controller
             $works = $works->where('place', $searchPlace);
         }
         $works = $works->with('tuman', 'jobrel')->orderByDesc('id')->paginate(6);
-        return view('search', compact('v', 'jobs', 'works'));
+        return view('home', compact('v', 'jobs', 'works'));
     }
 
     public function userINWork(Request $request, User $user)

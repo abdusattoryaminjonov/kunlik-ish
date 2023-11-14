@@ -10,41 +10,41 @@
             </div>
             <div class="stars">
                 @if (auth()->user()->users_ball_count == 0)
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                 @elseif(auth()->user()->users_ball_count == 1)
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                 @elseif(auth()->user()->users_ball_count == 2)
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                 @elseif(auth()->user()->users_ball_count == 3)
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                 @elseif(auth()->user()->users_ball_count == 4)
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                 @elseif(auth()->user()->users_ball_count == 5)
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
-                    <i class="fa-solid fa-star faol"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
+                    <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                 @endif
             </div>
             <label>{{ auth()->user()->users_ball_count }} score</label>
@@ -78,19 +78,25 @@
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                                 </svg>Security
                             </a>
-                            <a href="#notification" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded  ">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="position-relative feather feather-bell mr-2">
+                            <a href="#notification" data-toggle="tab"
+                                class="nav-item nav-link has-icon nav-link-faded  ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="position-relative feather feather-bell mr-2">
                                     <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                                     <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                                 </svg>
                                 <label class="position-relative">
 
                                     Notification
+                                    {{-- @dd($works)
+                                    @foreach ($works->users as $user)
+                                        {{ $count++ }}
+                                    @endforeach --}}
                                     <span
                                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        99+
+                                        {{ $notf }}
                                         <span class="visually-hidden">unread messages</span>
                                     </span>
                                 </label>
@@ -394,69 +400,56 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="notification">
-                            <h6>NOTIFICATION SETTINGS</h6>
+                            <h5>NOTIFICATION</h5>
                             <hr>
-                            <form>
-                                <div class="form-group">
-                                    <label class="d-block mb-0">Security Alerts</label>
-                                    <div class="small text-muted mb-3">Receive security alert notifications via email</div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1"
-                                            checked="">
-                                        <label class="custom-control-label" for="customCheck1">Email each time a
-                                            vulnerability is found</label>
+
+                            <div class="form-group mb-0">
+                                <ul class="list-group list-group-sm ">
+                                    <div class="overflow-auto row" style="height: 400px">
+                                        @foreach ($habarlar as $habar)
+                                            <form>
+                                                <div class="col-md-12 m-2">
+                                                    <div class="card b-1 hover-shadow mb-20">
+                                                        <div>
+                                                            <div class="media card-body">
+                                                                <div class="media-body">
+                                                                    <div class="mb-2">
+                                                                        <a class="link-underline-light"
+                                                                            href="{{ route('showUser', ['user' => $habar->user->id]) }}">
+                                                                            <span
+                                                                                class="fs-20 pr-16">{{ $habar->user->name }}
+                                                                                {{ $habar->user->surname }} </span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="d-flex">
+                                                                        @foreach ($habar->user->jobs as $job)
+                                                                            <small
+                                                                                class="fs-16 fw-300 ls-1">{{ $job['name'] }}</small>
+                                                                        @endforeach
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="media-right text-right d-none d-md-block mt-2">
+                                                                    {!! $habar->note !!}
+                                                                </div>
+                                                            </div>
+                                                            <footer class="card-footer flexbox align-items-center">
+                                                                <div>
+                                                                    <strong>Vaqti :</strong>
+                                                                    <span>{{ $habar->created_at->format('Y-m-d') }}</span>
+                                                                </div>
+                                                            </footer>
+                                                        </div>
+                                                        {{-- <div>
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </div> --}}
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        @endforeach
                                     </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2"
-                                            checked="">
-                                        <label class="custom-control-label" for="customCheck2">Email a digest summary of
-                                            vulnerability</label>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <label class="d-block">SMS Notifications</label>
-                                    <ul class="list-group list-group-sm">
-                                        <li class="list-group-item has-icon">
-                                            Comments
-                                            <div class="custom-control custom-control-nolabel custom-switch ml-auto">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                                                    checked="">
-                                                <label class="custom-control-label" for="customSwitch1"></label>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item has-icon">
-                                            Updates From People
-                                            <div class="custom-control custom-control-nolabel custom-switch ml-auto">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                                <label class="custom-control-label" for="customSwitch2"></label>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item has-icon">
-                                            Reminders
-                                            <div class="custom-control custom-control-nolabel custom-switch ml-auto">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch3"
-                                                    checked="">
-                                                <label class="custom-control-label" for="customSwitch3"></label>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item has-icon">
-                                            Events
-                                            <div class="custom-control custom-control-nolabel custom-switch ml-auto">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch4"
-                                                    checked="">
-                                                <label class="custom-control-label" for="customSwitch4"></label>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item has-icon">
-                                            Pages You Follow
-                                            <div class="custom-control custom-control-nolabel custom-switch ml-auto">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                                                <label class="custom-control-label" for="customSwitch5"></label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </form>
+                                </ul>
+                            </div>
                         </div>
                         <div class="tab-pane" id="billing">
                             <h3>Ishlar</h3>
@@ -701,7 +694,8 @@
                                                             style="padding: 2em">
                                                             <div style=" margin-top: 2em ">
                                                                 @foreach ($work->users as $worker)
-                                                                    <div class="d-flex followers border border-primary">
+                                                                    <div
+                                                                        class="d-flex dflex1 followers border border-primary">
                                                                         <div class="text-center">
                                                                             <h5>
                                                                                 <a href="{{ route('showUser', ['user' => $worker->id]) }}"
@@ -711,47 +705,78 @@
                                                                             </h5>
                                                                             <div class="stars">
                                                                                 @if ($worker->users_ball_count == 0)
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
                                                                                 @elseif($worker->users_ball_count == 1)
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
                                                                                 @elseif($worker->users_ball_count == 2)
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
                                                                                 @elseif($worker->users_ball_count == 3)
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
                                                                                 @elseif($worker->users_ball_count == 4)
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star"
+                                                                                        style="color: #bbbbbb;"></i>
                                                                                 @elseif($worker->users_ball_count == 5)
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
-                                                                                    <i class="fa-solid fa-star faol"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
+                                                                                    <i class="fa-solid fa-star faol"
+                                                                                        style="color: #bbbbbb;"></i>
                                                                                 @endif
                                                                             </div>
                                                                         </div>
                                                                         <div class="data1">
                                                                             <div>
-                                                                                <i class="fa-solid fa-user fa-soliU"></i>
+                                                                                <i
+                                                                                    class="fa-solid fa-user fa-soliU fa-solid11"></i>
                                                                                 <p>Yosh</p>
                                                                             </div>
                                                                             <h5>{{ $worker->age }}</h5>
@@ -759,7 +784,7 @@
                                                                         <div class="data1">
                                                                             <div>
                                                                                 <i
-                                                                                    class="fa-solid fa-user-doctor fa-soliU"></i>
+                                                                                    class="fa-solid fa-user-doctor fa-soliU fa-solid11"></i>
                                                                                 <p>Kasb</p>
                                                                             </div>
                                                                             @foreach ($worker->load('jobs')->jobs as $job)
@@ -768,7 +793,8 @@
                                                                         </div>
                                                                         <div class="data1">
                                                                             <div>
-                                                                                <i class="fa-solid fa-phone fa-soliU"></i>
+                                                                                <i
+                                                                                    class="fa-solid fa-phone fa-soliU fa-solid11"></i>
                                                                                 <p>Telefon</p>
                                                                             </div>
                                                                             <h5>{{ $worker->phonenumber }}</h5>
@@ -813,7 +839,7 @@
             margin-left: 20% !important;
         }
 
-        .d-flex {
+        .dflex1 {
             justify-content: space-between;
             align-items: flex-end;
         }
@@ -827,7 +853,7 @@
             });
     </script>
     <script>
-        const stars = document.querySelectorAll(".stars i");
+        // const stars = document.querySelectorAll(".stars i");
 
         // stars.forEach((star, index1) => {
         //     star.addEventListener("click", () => {
