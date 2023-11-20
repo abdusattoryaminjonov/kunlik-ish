@@ -9,37 +9,37 @@
                 <label>Hello!</label>
             </div>
             <div class="stars">
-                @if (auth()->user()->users_ball_count == 0)
+                @if ((int)$avg == 0)
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif(auth()->user()->users_ball_count == 1)
+                @elseif((int)$avg == 1)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif(auth()->user()->users_ball_count == 2)
+                @elseif((int)$avg == 2)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif(auth()->user()->users_ball_count == 3)
+                @elseif((int)$avg == 3)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif(auth()->user()->users_ball_count == 4)
+                @elseif((int)$avg == 4)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif(auth()->user()->users_ball_count == 5)
+                @elseif((int)$avg == 5)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
@@ -47,7 +47,7 @@
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                 @endif
             </div>
-            <label>{{ auth()->user()->users_ball_count }} score</label>
+            <label>{{(int)$avg}} score</label>
         </div>
     </div>
 
@@ -883,7 +883,7 @@
                                                                         <div class="row"
                                                                             style="flex-direction: column;">
                                                                             <form
-                                                                                action="{{ route('deleteUserfromWork', ['id' => $worker->id]) }}"
+                                                                                action="{{ route('deleteUserfromWork', ['user' => $worker->id, 'work' => $work->id]) }}"
                                                                                 method="POST">
                                                                                 @csrf
                                                                                 @method('DELETE')

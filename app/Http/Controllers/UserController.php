@@ -28,11 +28,12 @@ class UserController extends Controller
       $v = Viloyat::with('tumanlari')->get();
       $notf = Report::where('userId', auth()->id())->get()->count();
       $habarlar = Report::where('userId', auth()->id())->get();
+      $avg = Report::where('userId', auth()->id())->avg('ball');
       // $userworks = UserWork::where('user_id', auth()->id()->with(auth()->user()));
       auth()->user()->load(['works']);
       // dd(auth()->user());
       // $v = Viloyat::all();
-      return view('user_profil', compact('habarlar', 'jobs', 'v', 'notf'));
+      return view('user_profil', compact('habarlar', 'jobs', 'v', 'notf','avg'));
    }
    function login(Request $request)
    {

@@ -130,7 +130,7 @@
                                 <form action="{{ route('userInWork', ['user' => auth()->user()->id]) }}" method="POST">
                                     @csrf
                                     <input type="hidden" value="{{ $work->id }}" name="work_id">
-                                    <input type="hidden" value="0" name="status">
+                                    {{-- <input type="hidden" value="0" name="status"> --}}
                                     {{-- @if (count($work->user)) --}}
                                     <button type="submit" class="btn btn-primary" id="liveToastBtn">click</button>
                                 </form>

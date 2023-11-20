@@ -92,7 +92,7 @@ Route::get('/m', function () {
 
 // Route::post('/search', [WorkController::class, '']);
 
-Route::get('/profil',[UserController::class,'index'])->name('profil');
+Route::get('/profil', [UserController::class, 'index'])->name('profil');
 
 Route::put('/edit-user-data', [UserController::class, 'editUser'])->name('edit_user');
 Route::put('/change-password', [UserController::class, 'changePassword'])->name('change_password');
@@ -111,8 +111,8 @@ Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob'])->name('
 
 Route::post('/create-work', [WorkController::class, 'createWork'])->name('user.work.create');
 Route::get('/send-notification', [WorkController::class, 'sendNotification'])->name('notification');
-Route::post('/get-user', [WorkController::class,'getUsertoWork'])->name('getUsertoWork');
-Route::delete('/delete-userFromWork/{id}',[WorkController::class,'deleteUserfromWork'])->name('deleteUserfromWork');
+Route::post('/get-user', [WorkController::class, 'getUsertoWork'])->name('getUsertoWork');
+Route::delete('/delete-userFromWork/{user}-{work}', [WorkController::class, 'deleteUserfromWork'])->name('deleteUserfromWork');
 
 Route::get('/game', function () {
     return view('game');

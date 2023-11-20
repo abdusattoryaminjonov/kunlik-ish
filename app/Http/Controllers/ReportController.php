@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Report;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreReportRequest;
 use App\Http\Requests\UpdateReportRequest;
-use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {

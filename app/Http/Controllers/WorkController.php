@@ -100,9 +100,9 @@ class WorkController extends Controller
         //     'url' => url('/profil'),
         //     'raxmat' => 'Senda 14kun bor'
         // ];
-       
-        // auth()->user()->works()->syncWithoutDetaching($request->input('work_id'),['status' => 0]);
-        auth()->user()->works()->syncWithoutDetaching($request->input('work_id')->input('status'));
+
+        auth()->user()->works()->syncWithoutDetaching($request->input('work_id'));
+        // auth()->user()->works()->syncWithoutDetaching($request->input('work_id')->input('status'));
         //$user->notify(new Jo_apply($workersNotif));
         return redirect('/home');
     }
@@ -139,10 +139,11 @@ class WorkController extends Controller
 
     }
 
-    public function deleteUserfromWork(UserWork $userWork, Work $work)
+    public function deleteUserfromWork(User $user, Work $work)
     {
-        $work->users()->detach($userWork->id);
-        $userWork->delete();
+        // dd($work->id);
+        $work->users()->detach($user->id);
+        // $user->delete();
         return redirect('/profil');
     }
 
