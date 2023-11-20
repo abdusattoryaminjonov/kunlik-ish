@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('work_id')->constrained();
             $table->integer('status'); // rozi bo'lganlar
+            $table->timestamps();
         });
     }
 

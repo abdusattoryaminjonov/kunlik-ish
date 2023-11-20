@@ -72,7 +72,7 @@
                                 <p>
                                     <i class="fa-solid fa-user" style="font-size: 15px !important; color:#797979"></i>
                                 </p>
-                                <p style="color: #797979;margin-left: 3px;">: 4</p>
+                                <p style="color: #797979;margin-left: 3px;">99</p>
                             </div>
                         </div>
                     </div>
@@ -130,6 +130,7 @@
                                 <form action="{{ route('userInWork', ['user' => auth()->user()->id]) }}" method="POST">
                                     @csrf
                                     <input type="hidden" value="{{ $work->id }}" name="work_id">
+                                    <input type="hidden" value="0" name="status">
                                     {{-- @if (count($work->user)) --}}
                                     <button type="submit" class="btn btn-primary" id="liveToastBtn">click</button>
                                 </form>

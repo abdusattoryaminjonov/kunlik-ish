@@ -111,6 +111,8 @@ Route::delete('/delete-job/{job}', [UserController::class, 'deleteJob'])->name('
 
 Route::post('/create-work', [WorkController::class, 'createWork'])->name('user.work.create');
 Route::get('/send-notification', [WorkController::class, 'sendNotification'])->name('notification');
+Route::post('/get-user', [WorkController::class,'getUsertoWork'])->name('getUsertoWork');
+Route::delete('/delete-userFromWork/{id}',[WorkController::class,'deleteUserfromWork'])->name('deleteUserfromWork');
 
 Route::get('/game', function () {
     return view('game');

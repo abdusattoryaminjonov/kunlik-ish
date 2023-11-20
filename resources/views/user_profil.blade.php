@@ -65,16 +65,24 @@
                                     <circle cx="12" cy="7" r="4"></circle>
                                 </svg>Profile Information
                             </a>
+                            <a href="#notif" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                                <img style="width: 25px !important" src="{{ asset('icons/works.ico') }}">
+                                <label class="position-relative">
+                                    Kutilayotgan Ishlar
+                                    <img style="width: 25px !important" src="{{ asset('gif/gif.svg') }}">
+                                </label>
+                            </a>
                             <a href="#billing" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                                <img style="width: 25px !important" src="{{ asset('icons/work_post.ico') }}">Posts
+                                <img style="width: 25px !important" src="{{ asset('icons/work_post.ico') }}">Yaratilgan
+                                Ishlar
                             </a>
                             <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                                <img style="width: 25px !important" src="{{ asset('icons/plus_work.ico') }}">Add post
+                                <img style="width: 25px !important" src="{{ asset('icons/plus_work.ico') }}">Ish Yaratish
                             </a>
                             <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-shield mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2">
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                                 </svg>Security
                             </a>
@@ -88,12 +96,7 @@
                                     <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                                 </svg>
                                 <label class="position-relative">
-
-                                    Notification
-                                    {{-- @dd($works)
-                                    @foreach ($works->users as $user)
-                                        {{ $count++ }}
-                                    @endforeach --}}
+                                    Habarlar
                                     <span
                                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         {{ $notf }}
@@ -254,6 +257,88 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane" id="notif">
+                            <h5>22 Qo'shilgan Ishlar</h5>
+                            <hr>
+
+                            <div class="form-group mb-0">
+                                <ul class="list-group list-group-sm ">
+                                    <div class="overflow-auto row" style="height: 400px">
+                                        @foreach (auth()->user()->works as $work)
+                                            <div class="col-md-12 m-2  cardRaz">
+                                                <div class="card b-1 hover-shadow mb-20">
+                                                    <div>
+                                                        <div class="media card-body">
+                                                            <div class="media-body">
+                                                                <div class="mb-2">
+                                                                    <a class="link-underline-light"
+                                                                        href="{{ route('showUser', ['user' => $work->user]) }}">
+                                                                        <span class="fs-20 pr-16">{{ $work->user->name }}
+                                                                            {{ $work->user->surname }}
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="media-right text-right d-none d-md-block mt-2"
+                                                                style="min-height: 90px !important;">
+                                                                <h4>{{ $work->title }}</h4>
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-muted d-block">
+                                                                    <i class="fa-solid fa-location-dot fa-solid11"></i>
+                                                                    {{ $work->tuman->name_uz }}</span>
+                                                            </div>
+                                                            <div>
+                                                                <p><i class="fa-solid fa-sack-dollar fa-solid11"
+                                                                        style="margin-right: 3px"></i>{{ $work->jobrel->name }}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <p><i class="fa-solid fa-user-doctor fa-solid11"
+                                                                        style=" margin-right: 3px;"></i>
+                                                                    {{ $work->price }}so'm</p>
+                                                            </div>
+                                                        </div>
+                                                        <footer class="card-footer flexbox align-items-center">
+                                                            <div class="d-flex justify-content-between">
+                                                                <p><i class="fa-solid fa-calendar-days fa-solid11"
+                                                                        style="margin-right: 3px"></i>{{ $work->date }}
+                                                                </p>
+                                                                <div class="d-flex">
+                                                                    {{-- @dd($work->pivot) --}}
+                                                                    {{-- @dd($userworks) --}}
+                                                                    {{-- @foreach ($userworks as $userwork) --}}
+                                                                    @if ($work->pivot->status == 0)
+                                                                        <div style="margin-right: 15px;heigth: 30px;">
+                                                                            <img style="width: 30px !important"
+                                                                                src="{{ asset('gif/loading.svg') }}">
+                                                                        </div>
+                                                                    @elseif($work->pivot->status == 1)
+                                                                        <div style="margin-right: 15px;heigth: 30px;">
+                                                                            <span class="badge text-bg-success "> <i
+                                                                                    class="fa-solid fa-check"
+                                                                                    style="color: #ffffff;"></i></span>
+                                                                        </div>
+                                                                    @endif
+                                                                    {{-- @endforeach --}}
+                                                                    <form action="">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger btn-sm">
+                                                                            <i class="fa-regular fa-trash-can"
+                                                                                style="color: #ffffff;"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </footer>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="tab-pane" id="account">
                             <h6>Create Work</h6>
                             <hr>
@@ -409,7 +494,7 @@
                                         @foreach ($habarlar as $habar)
                                             <form>
                                                 <div class="col-md-12 m-2">
-                                                    <div class="card b-1 hover-shadow mb-20">
+                                                    <div class="card b-1 hover-shadow mb-20 cardRaz">
                                                         <div>
                                                             <div class="media card-body">
                                                                 <div class="media-body">
@@ -457,8 +542,7 @@
                             <div class="form-group mb-0">
                                 <div class="border border-gray-500 bg-gray-200 p-3  font-size-sm">
                                     <div class="overflow-auto row" style="height: 500px">
-
-                                        @foreach ($works as $work)
+                                        @foreach (auth()->user()->work as $work)
                                             <div class="col-lg-6 col-md-6 col-12 mt-4">
                                                 <div class="card border-0 bg-light rounded shadow " style="width: 350px">
                                                     <div class="card-body p-4">
@@ -523,7 +607,7 @@
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-body">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content w100">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">
                                                                     Postni
@@ -646,11 +730,8 @@
                                                                         </div>
                                                                         <div class="col-sm-10 input-group"
                                                                             style="width: 415px;">
-                                                                            <span class="input-group-text">
-                                                                                <img style="width: 20px !important"
-                                                                                    src="{{ asset('icons/description.ico') }}">
-                                                                            </span>
-                                                                            <textarea id="editor" style="border-color: #97a7c0; height: 135px" class="form-control" name="description">{{ $work->description }}</textarea>
+
+                                                                            <textarea id="editor1" style="border-color: #97a7c0; height: 135px" class="form-control" name="description">{!! $work->description !!}</textarea>
                                                                         </div>
                                                                         <div class="d-flex mt-3">
                                                                             <label>Kasbi </label>
@@ -689,7 +770,7 @@
                                             <div class="modal fade" id="user_{{ $work->id }}" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
-                                                    <div class="modal-content">
+                                                    <div class="modal-content ">
                                                         <div class="overflow-auto row d-flex justify-content-center "
                                                             style="padding: 2em">
                                                             <div style=" margin-top: 2em ">
@@ -801,15 +882,31 @@
                                                                         </div>
                                                                         <div class="row"
                                                                             style="flex-direction: column;">
-                                                                            <button type="button"
-                                                                                class="btn btn-danger btn-sm">
-                                                                                <i class="fa-regular fa-trash-can"
-                                                                                    style="color: #ffffff;"></i>
-                                                                            </button>
-                                                                            <button type="button"
-                                                                                class="btn btn-primary btn-sm mt-2">
-                                                                                <i class="fa-regular fa-thumbs-up"></i>
-                                                                            </button>
+                                                                            <form
+                                                                                action="{{ route('deleteUserfromWork', ['id' => $worker->id]) }}"
+                                                                                method="POST">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit"
+                                                                                    class="btn btn-danger btn-sm">
+                                                                                    <i class="fa-regular fa-trash-can"
+                                                                                        style="color: #ffffff;"></i>
+                                                                                </button>
+                                                                            </form>
+                                                                            <form action="{{ route('getUsertoWork') }}"
+                                                                                method="POST">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $worker->id }}"
+                                                                                    name="userId">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $work->id }}"
+                                                                                    name="workId">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary btn-sm mt-2">
+                                                                                    <i class="fa-regular fa-thumbs-up"></i>
+                                                                                </button>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 @endforeach
@@ -830,24 +927,19 @@
 
     </div>
     <style>
-        .modal-content {
-            width: 900px !important;
-            height: 445px;
-        }
 
-        .modal-dialog {
-            margin-left: 20% !important;
-        }
-
-        .dflex1 {
-            justify-content: space-between;
-            align-items: flex-end;
-        }
     </style>
     <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
             .catch(error => {
                 console.error(error);
             });

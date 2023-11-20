@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Job;
 use App\Models\User;
+use App\Models\UserWork;
 use App\Models\Work;
 use App\Models\Report;
 use App\Models\Viloyat;
@@ -17,14 +18,21 @@ class UserController extends Controller
 
    public function index()
    {
-      $works = Work::with('jobrel')->where('user_id', auth()->id())->orderByDesc('id')->get();
+      // $works = Work::with('jobrel')
+      //    // ->join('user_work','works.id','=','user_work.work_id')
+      //    ->where('user_id', auth()->id())
+      //    ->orderByDesc('id')
+      //    ->get();
       // dd($works );
       $jobs = Job::orderBy('name')->get();
       $v = Viloyat::with('tumanlari')->get();
       $notf = Report::where('userId', auth()->id())->get()->count();
       $habarlar = Report::where('userId', auth()->id())->get();
+      // $userworks = UserWork::where('user_id', auth()->id()->with(auth()->user()));
+      auth()->user()->load(['works']);
+      // dd(auth()->user());
       // $v = Viloyat::all();
-      return view('user_profil', compact('habarlar', 'jobs', 'v', 'works', 'notf'));
+      return view('user_profil', compact('habarlar', 'jobs', 'v', 'notf'));
    }
    function login(Request $request)
    {
@@ -35,7 +43,7 @@ class UserController extends Controller
 
       if (auth()->attempt(['name' => $incomingFields['name'], 'password' => $incomingFields['password']])) {
          $request->session()->regenerate();
-         return redirect('/');
+         return redirect('/home');
       }
       return redirect('/login');
    }

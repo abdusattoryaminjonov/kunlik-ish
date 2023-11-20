@@ -66,19 +66,22 @@ class User extends Authenticatable
         return $this->belongsToMany(Job::class, 'user_job', 'user_id', 'job_id');
     }
 
-    public function works(){
-        return $this->belongsToMany(Work::class, 'user_work', 'user_id', 'work_id');
+    public function works()
+    {
+        return $this->belongsToMany(Work::class, 'user_work', 'user_id', 'work_id')->withPivot('status');
     }
 
-    public function reports_to(){
-        return $this->hasMany(Report::class,'userId','id');
+    public function reports_to()
+    {
+        return $this->hasMany(Report::class, 'userId', 'id');
     }
     public function reports()
     {
-        return $this->hasMany(Report::class,'author','id' );
+        return $this->hasMany(Report::class, 'author', 'id');
     }
-    public function comments(){
-        
+    public function comments()
+    {
+
     }
 
 

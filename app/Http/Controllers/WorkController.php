@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\User;
+use App\Models\UserWork;
 use App\Models\Work;
 use App\Models\Viloyat;
 use App\Notifications\Jo_apply;
@@ -16,7 +17,8 @@ class WorkController extends Controller
     {
         $jobs = Job::orderBy('name')->get();
         $v = Viloyat::with('tumanlari')->get();
-        $works = Work::with('tuman', 'jobrel')->orderByDesc('date')->paginate(6); //->get();popular()->
+        // $agree = Work::where('user_id', auth()->id())->get()->count();
+        $works = Work::popular()->with('tuman', 'jobrel')->orderByDesc('date')->paginate(6); //->get();popular()->
 
         return view('home', compact('v', 'jobs', 'works'));
     }
@@ -86,7 +88,7 @@ class WorkController extends Controller
         if ($searchPlace !== 0) {
             $works = $works->where('place', $searchPlace);
         }
-        $works = $works->with('tuman', 'jobrel')->orderByDesc('id')->paginate(6);
+        $works = $works->popular()->with('tuman', 'jobrel')->orderByDesc('id')->paginate(6);
         return view('home', compact('v', 'jobs', 'works'));
     }
 
@@ -98,13 +100,51 @@ class WorkController extends Controller
         //     'url' => url('/profil'),
         //     'raxmat' => 'Senda 14kun bor'
         // ];
-
-        auth()->user()->works()->attach($request->input('work_id'), ['status' => 0]);
+       
+        // auth()->user()->works()->syncWithoutDetaching($request->input('work_id'),['status' => 0]);
+        auth()->user()->works()->syncWithoutDetaching($request->input('work_id')->input('status'));
         //$user->notify(new Jo_apply($workersNotif));
         return redirect('/home');
     }
+    public function getUsertoWork(Request $request)
+    {
+        $work = $request->validate([
+            'userId' => 'required',
+            'workId' => 'required'
+
+        ]);
+        $user_work = UserWork::query()
+            ->where('work_id', $work['workId'])
+            ->where('user_id', $work['userId'])
+            ->update(['status' => 1]);
+
+        return redirect('/profil');
 
 
+
+        // dd($user_work);
+
+        // if ($userwork['user_id'] == $work['userId'] and $userwork['work_id'] == $work['workId']) {
+        //     $userwork->update($work);
+        //     return redirect('/profil');
+        // }
+
+
+        // $uid = $work['userId'];
+        // $w = Work::where('id', $work['workId'])->with([
+        //     'users' => function ($q) use ($uid) {
+        //         $q->where('users.id', $uid);
+        //     }
+        // ])->first();
+
+    }
+
+    public function deleteUserfromWork(UserWork $userWork, Work $work)
+    {
+        $work->users()->detach($userWork->id);
+        $userWork->delete();
+        return redirect('/profil');
+    }
 
 
     public function deleteWork(Work $work)

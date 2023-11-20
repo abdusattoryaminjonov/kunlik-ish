@@ -102,3 +102,23 @@
 .data1 p {
     font-size: 10px;
 }
+.cardRaz{
+    width: 400px !important;
+}
+ .modal-content {
+     width: 900px !important;
+     height: 445px;
+ }
+
+ .modal-dialog {
+     margin-left: 20% !important;
+ }
+
+ .dflex1 {
+     justify-content: space-between;
+     align-items: flex-end;
+ }
+
+ .w100 {
+     width: 1100px !important;
+ }
