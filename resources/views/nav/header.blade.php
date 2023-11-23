@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light nav1">
     <div class="container-fluid">
         <a class="navbar-brand" href="/home">
             <img style="width: 150px !important;margin: -40px; margin-left:20px;" src="{{ asset('icons/logo11.png') }}">

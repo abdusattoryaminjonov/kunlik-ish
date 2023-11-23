@@ -50,4 +50,9 @@ class Work extends Model
     {
         return $this->belongsTo(Job::class, 'job');
     }
+    public function getUsersCountAttribute(): int
+    {
+        return $this->users()->count();
+    }
+
 }

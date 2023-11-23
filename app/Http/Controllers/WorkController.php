@@ -18,20 +18,19 @@ class WorkController extends Controller
         $jobs = Job::orderBy('name')->get();
         $v = Viloyat::with('tumanlari')->get();
         // $agree = Work::where('user_id', auth()->id())->get()->count();
-        $works = Work::popular()->with('tuman', 'jobrel')->orderByDesc('date')->paginate(6); //->get();popular()->
-
+        $works = Work::popular()->with('tuman', 'jobrel', 'users')->orderByDesc('date')->paginate(6); //->get();popular()->
         return view('home', compact('v', 'jobs', 'works'));
     }
     public function createWork(Request $request)
     {
         $incomingFields = $request->validate([
             'title' => 'required|string|min:8',
-            'description' => 'required|string',
+            'description' => 'required|string|min:10',
             'place' => 'required|int',
             'date' => 'required|date',
             'job' => 'required',
             'workers' => 'required',
-            'price' => 'required',
+            'price' => 'required|gte:0',
             'agreeables' => 'nullable|array'
 
         ]);

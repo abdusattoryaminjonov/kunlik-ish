@@ -9,37 +9,37 @@
                 <label>Hello!</label>
             </div>
             <div class="stars">
-                @if ((int)$avg == 0)
+                @if (auth()->user()->users_ball == 0)
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif((int)$avg == 1)
+                @elseif(auth()->user()->users_ball == 1)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif((int)$avg == 2)
+                @elseif(auth()->user()->users_ball == 2)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif((int)$avg == 3)
+                @elseif(auth()->user()->users_ball == 3)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif((int)$avg == 4)
+                @elseif(auth()->user()->users_ball == 4)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star" style="color: #bbbbbb;"></i>
-                @elseif((int)$avg == 5)
+                @elseif(auth()->user()->users_ball == 5)
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
@@ -47,7 +47,7 @@
                     <i class="fa-solid fa-star faol" style="color: #bbbbbb;"></i>
                 @endif
             </div>
-            <label>{{(int)$avg}} score</label>
+            <label>{{ auth()->user()->users_ball }} score</label>
         </div>
     </div>
 
@@ -296,7 +296,7 @@
                                                             <div>
                                                                 <p><i class="fa-solid fa-user-doctor fa-solid11"
                                                                         style=" margin-right: 3px;"></i>
-                                                                    {{ $work->price }}so'm</p>
+                                                                    {{ number_format($work->price, 0, '.', ' ') }}so'm</p>
                                                             </div>
                                                         </div>
                                                         <footer class="card-footer flexbox align-items-center">
@@ -321,7 +321,11 @@
                                                                         </div>
                                                                     @endif
                                                                     {{-- @endforeach --}}
-                                                                    <form action="">
+                                                                    <form
+                                                                        action="{{ route('deleteUserfromWork', ['user' => auth()->user()->id, 'work' => $work->id]) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
                                                                         <button type="submit"
                                                                             class="btn btn-danger btn-sm">
                                                                             <i class="fa-regular fa-trash-can"
@@ -341,6 +345,7 @@
                         </div>
                         <div class="tab-pane" id="account">
                             <h6>Create Work</h6>
+                            {{-- @lang('MyText') --}}
                             <hr>
                             <form action="{{ route('user.work.create') }}" method="POST">
                                 @csrf
@@ -349,35 +354,32 @@
                                         <div>
                                             <div class="d-flex">
                                                 <label>Sarlavha </label>
-                                                <p style="color: red">* Muxim</p>
+                                                <p style="color: #39a30d">* Muxim</p>
                                             </div>
                                             <div class="col-sm-10 input-group" style="width: 415px">
-                                                <span class="input-group-text">
-                                                    <img style="width: 20px !important"
-                                                        src="{{ asset('icons/title.ico') }}">
-                                                </span>
-                                                <input style="border-color: #97a7c0" type="text" id="icon"
-                                                    class="form-control" name="title">
+
+                                                <input type="text" id="icon" value="{{ old('title') }}"
+                                                    class="form-control w-100 @if ($errors->has('title')) is-invalid @endif "
+                                                    name="title">
+                                                <br />
                                                 @if ($errors->has('title'))
                                                     <div class="error">{{ $errors->first('title') }}</div>
                                                 @endif
                                             </div>
                                             <div class="d-flex mt-3">
                                                 <label>Manzil </label>
-                                                <p style="color: red">* Muxim</p>
+                                                <p style="color:#39a30d">* Muxim</p>
                                             </div>
                                             <div class="col-sm-10 input-group " style="width: 415px">
-                                                <span class="input-group-text">
-                                                    <img style="width: 20px !important"
-                                                        src="{{ asset('icons/location.ico') }}">
-                                                </span>
                                                 <select id="inputState"
                                                     class="form-select border border-primary chosen-select"
                                                     style="border-color: #97a7c0 !important;" name="place">
                                                     @foreach ($v as $viloyat)
                                                         <optgroup label="{{ $viloyat->name_uz }}">
                                                             @foreach ($viloyat->tumanlari as $tuman)
-                                                                <option value="{{ $tuman->id }}">{{ $tuman->name_uz }}
+                                                                <option value="{{ $tuman->id }}"
+                                                                    @if (old('place') == $tuman->id) selected @endif>
+                                                                    {{ $tuman->name_uz }}
                                                                 </option>
                                                             @endforeach
                                                         </optgroup>
@@ -389,29 +391,29 @@
                                             <div>
                                                 <div class="d-flex mt-3">
                                                     <label>Ishchilar soni </label>
-                                                    <p style="color: red">* Muxim</p>
+                                                    <p style="color: #39a30d">* Muxim</p>
                                                 </div>
                                                 <div class="col-sm-10 input-group" style="width: 200px">
-                                                    <span class="input-group-text">
-                                                        <img style="width: 25px !important"
-                                                            src="{{ asset('icons/workers.ico') }}">
-                                                    </span>
-                                                    <input style="border-color: #97a7c0" type="number" name="workers"
-                                                        class="form-control">
+                                                    <input type="number" name="workers" value="{{ old('workers') }}"
+                                                        class="form-control w-100 @if ($errors->has('workers')) is-invalid @endif">
+                                                    <br />
+                                                    @if ($errors->has('workers'))
+                                                        <div class="error">{{ $errors->first('workers') }}</div>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div style="margin-left: 15px">
                                                 <div class="d-flex mt-3">
                                                     <label>Ish xaqqi </label>
-                                                    <p style="color: red">* Muxim</p>
+                                                    <p style="color: #39a30d">* Muxim</p>
                                                 </div>
                                                 <div class="col-sm-10 input-group" style="width: 200px">
-                                                    <span class="input-group-text">
-                                                        <img style="width: 25px !important"
-                                                            src="{{ asset('icons/price.ico') }}">
-                                                    </span>
-                                                    <input style="border-color: #97a7c0" type="number" name="price"
-                                                        class="form-control">
+                                                    <input type="number" value="{{ old('price') }}" name="price"
+                                                        class="form-control w-100 @if ($errors->has('price')) is-invalid @endif">
+                                                    <br />
+                                                    @if ($errors->has('price'))
+                                                        <div class="error">{{ $errors->first('price') }}</div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -419,28 +421,27 @@
                                     <div>
                                         <div class="d-flex">
                                             <label>To'liq ma'lumot </label>
-                                            <p style="color: red">* Muxim</p>
+                                            <p style="color: #39a30d">* Muxim</p>
                                         </div>
                                         <div class="col-sm-10 input-group" style="width: 415px;">
-                                            <span class="input-group-text">
-                                                <img style="width: 20px !important"
-                                                    src="{{ asset('icons/description.ico') }}">
-                                            </span>
-                                            <textarea id="editor" style="border-color: #97a7c0; " class="form-control" name="description"></textarea>
+                                            <textarea id="editor" value="{{ old('description') }}"
+                                                class="form-control w-100 @if ($errors->has('description')) is-invalid @endif" name="description"></textarea>
+                                            <br />
+                                            @if ($errors->has('description'))
+                                                <div class="error">{{ $errors->first('description') }}</div>
+                                            @endif
                                         </div>
                                         <div class="d-flex mt-3">
                                             <label>Kasbi </label>
-                                            <p style="color: red">* Muxim</p>
+                                            <p style="color: #39a30d">* Muxim</p>
                                         </div>
                                         <div class="col-sm-10 input-group " style="width: 415px">
-                                            <span class="input-group-text">
-                                                <img style="width: 20px !important" src="{{ asset('icons/job.ico') }}">
-                                            </span>
                                             <select id="inputState"
-                                                class="form-select border border-primary chosen-select"
-                                                style="border-color: #97a7c0 !important;" name="job">
+                                                class="form-select border border-primary chosen-select" name="job">
                                                 @foreach ($jobs as $job)
-                                                    <option value="{{ $job->id }}">{{ $job->name }}</option>
+                                                    <option value="{{ $job->id }}"
+                                                        @if (old('job') == $tuman->id) selected @endif>
+                                                        {{ $job->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -448,15 +449,14 @@
                                             <div>
                                                 <div class="d-flex mt-3">
                                                     <label>Ish kuni </label>
-                                                    <p style="color: red">* Muxim</p>
+                                                    <p style="color: #39a30d">* Muxim</p>
                                                 </div>
                                                 <div class="col-sm-10 input-group" style="width: 200px">
-                                                    <span class="input-group-text">
-                                                        <img style="width: 25px !important"
-                                                            src="{{ asset('icons/calendar.ico') }}">
-                                                    </span>
-                                                    <input style="border-color: #97a7c0" type="date" name="date"
+                                                    <input type="date" name="date" value=""
                                                         class="form-control">
+                                                    @if ($errors->has('date'))
+                                                        <div class="error">{{ $errors->first('date') }}</div>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div>
@@ -569,7 +569,7 @@
                                                             </div>
                                                             <hr>
                                                             <h5 style="color: rgb(72, 135, 21)">
-                                                                {{ $work->price }} so'm</h5>
+                                                                {{ number_format($work->price, 0, '.', ' ') }} so'm</h5>
                                                         </div>
                                                         <div class="mt-1 d-flex">
                                                             <p>created in :</p>
@@ -785,7 +785,7 @@
                                                                                 </a>
                                                                             </h5>
                                                                             <div class="stars">
-                                                                                @if ($worker->users_ball_count == 0)
+                                                                                @if ($worker->users_ball == 0)
                                                                                     <i class="fa-solid fa-star"
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star"
@@ -796,7 +796,7 @@
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star"
                                                                                         style="color: #bbbbbb;"></i>
-                                                                                @elseif($worker->users_ball_count == 1)
+                                                                                @elseif($worker->users_ball == 1)
                                                                                     <i class="fa-solid fa-star faol"
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star"
@@ -807,7 +807,7 @@
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star"
                                                                                         style="color: #bbbbbb;"></i>
-                                                                                @elseif($worker->users_ball_count == 2)
+                                                                                @elseif($worker->users_ball == 2)
                                                                                     <i class="fa-solid fa-star faol"
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star faol"
@@ -818,7 +818,7 @@
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star"
                                                                                         style="color: #bbbbbb;"></i>
-                                                                                @elseif($worker->users_ball_count == 3)
+                                                                                @elseif($worker->users_ball == 3)
                                                                                     <i class="fa-solid fa-star faol"
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star faol"
@@ -829,7 +829,7 @@
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star"
                                                                                         style="color: #bbbbbb;"></i>
-                                                                                @elseif($worker->users_ball_count == 4)
+                                                                                @elseif($worker->users_ball == 4)
                                                                                     <i class="fa-solid fa-star faol"
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star faol"
@@ -840,7 +840,7 @@
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star"
                                                                                         style="color: #bbbbbb;"></i>
-                                                                                @elseif($worker->users_ball_count == 5)
+                                                                                @elseif($worker->users_ball == 5)
                                                                                     <i class="fa-solid fa-star faol"
                                                                                         style="color: #bbbbbb;"></i>
                                                                                     <i class="fa-solid fa-star faol"

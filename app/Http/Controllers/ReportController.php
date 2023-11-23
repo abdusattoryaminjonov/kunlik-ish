@@ -32,12 +32,23 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        if(auth()->id() == $request['kimga'] ){
+            return redirect('home');
+        }
         $data = $request->all();
         $data['userId'] = $request['kimga'];
         $data['author'] = auth()->id();
         unset($data["_token"]);
         unset($data["kimga"]);
         Report::create($data);
+
+        $avg = Report::where('userId', $data['userId'])->avg('ball');
+        $count = Report::where('userId', $data['userId'])->count();
+
+        $user=User::find($data['userId']);
+        $user->users_ball=$avg;
+        $user->users_ball_count=$count;
+        $user->save();
         return redirect('/home');
     }
 

@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'Home')
 @section('content')
-    <div class="mt-3">
+    <div class="mt-3 d-flex justify-content-around">
         <div class="d-flex justify-content-around">
             <form action="{{ route('search') }}" method="POST" class="d-flex " role="search">
                 @csrf
@@ -22,23 +22,13 @@
                         </optgroup>
                     @endforeach
                 </select>
-                <button class="btn btn-primary" type="submit">
+                <button class="btn btn-primary" style="height: 44px;" type="submit">
                     <img style="width: 20px !important" src="{{ asset('icons/search.ico') }}">
                 </button>
             </form>
         </div>
     </div>
-    <div class="container mt-5 pt-4">
-        <div class="row align-items-end mb-4 pb-2">
-            <div class="col-md-8">
-                <div class="section-title text-center text-md-start">
-                    <h4 class="title mb-4">Find the perfect jobs</h4>
-                    <p class="text-muted mb-0 para-desc">Start work with Leaping. Build responsive, mobile-first projects on
-                        the web with the world's most popular front-end component library.</p>
-                </div>
-            </div><!--end col-->
-        </div><!--end row-->
-        {{-- <div class="grid text-center" style="--bs-columns: 3;"> --}}
+    <div class="container  pt-4">
         <div class="row">
             @foreach ($works as $work)
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
@@ -49,7 +39,7 @@
                             </div>
                             <div class="mt-3">
                                 <h3><i class="fa-solid fa-sack-dollar fa-solid11"
-                                        style="margin-right: 3px"></i>{{ $work->price }} so'm</h3>
+                                        style="margin-right: 3px"></i>{{ number_format($work->price,0,'.', ' ') }} so'm</h3>
                                 <h5><i class="fa-solid fa-calendar-days fa-solid11"
                                         style="margin-right: 3px"></i>{{ $work->date }}
                                 </h5>
@@ -72,7 +62,7 @@
                                 <p>
                                     <i class="fa-solid fa-user" style="font-size: 15px !important; color:#797979"></i>
                                 </p>
-                                <p style="color: #797979;margin-left: 3px;">99</p>
+                                <p style="color: #797979;margin-left: 3px;">{{ $work->users_count }}</p>
                             </div>
                         </div>
                     </div>
@@ -122,7 +112,7 @@
                                 <div class="d-flex text-center mt-2">
                                     <img style="width: 25px; margin-right: 5px"
                                         src="{{ asset('icons/workers_price.ico') }}" alt="">
-                                    <h6>{{ $work->price }} so'm</h6>
+                                    <h6>{{number_format($work->price,0,'.', ' ')}} so'm</h6>
                                 </div>
                             </div>
                             <div class="modal-footer">

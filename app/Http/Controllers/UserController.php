@@ -27,13 +27,13 @@ class UserController extends Controller
       $jobs = Job::orderBy('name')->get();
       $v = Viloyat::with('tumanlari')->get();
       $notf = Report::where('userId', auth()->id())->get()->count();
-      $habarlar = Report::where('userId', auth()->id())->get();
-      $avg = Report::where('userId', auth()->id())->avg('ball');
+      $habarlar = Report::with('user')->where('userId', auth()->id())->get();
+      // $avg = Report::where('userId', auth()->id())->avg('ball');
       // $userworks = UserWork::where('user_id', auth()->id()->with(auth()->user()));
       auth()->user()->load(['works']);
       // dd(auth()->user());
       // $v = Viloyat::all();
-      return view('user_profil', compact('habarlar', 'jobs', 'v', 'notf','avg'));
+      return view('user_profil', compact('habarlar', 'jobs', 'v', 'notf'));
    }
    function login(Request $request)
    {
@@ -92,6 +92,10 @@ class UserController extends Controller
 
    public function showUser(int $id)
    {
+      if(auth()->id() == $id){
+         return redirect('profil');
+      }
+      
       $user = User::find($id);
       //$jobs = Job::orderBy('name')->get();
       return view('show_user', compact('user'));
@@ -112,7 +116,6 @@ class UserController extends Controller
    {
       // dd($job);
       auth()->user()->jobs()->detach($job->id);
-      $job->delete();
       return redirect('/profil');
    }
    function logout()
