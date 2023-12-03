@@ -123,3 +123,6 @@ Route::post('/report', [ReportController::class, 'store'])->middleware('auth')->
 Route::get('/olmos', function () {
     return view('home');
 });
+
+
+Route::get('users/', [UserController::class, 'AllUsers'])->name('users');

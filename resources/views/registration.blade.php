@@ -38,7 +38,8 @@
             </div>
 
             <div class="mb-3">
-                <input type="text" placeholder="+998901234567" class="form-control" name="phonenumber">
+                <input type="text" class="form-control" placeholder="901112233" id="pattern-phone-mask"
+                    name="phonenumber">
             </div>
 
             <div class="mb-3">
@@ -47,6 +48,27 @@
             <button class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    <script type="text/javascript">
+        IMask(element, {
+            mask: '+{998}(00)000-00-00',
+            lazy: false, // make placeholder always visible
+            placeholderChar: '0' // defaults to '_'
+        })
+
+        // function validateName(input) {
+        //     IMask(input, {
+        //         mask: /^[A-Za-zА-ЯЁа-яё\s]*$/,
+        //     });
+        // }
+
+        // function validatePhone(input) {
+        //     IMask(input, {
+        //         mask: '+{998}(00)000-00-00'
+
+        //     })
+        // }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>

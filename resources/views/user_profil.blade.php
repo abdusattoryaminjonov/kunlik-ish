@@ -290,13 +290,13 @@
                                                             </div>
                                                             <div>
                                                                 <p><i class="fa-solid fa-sack-dollar fa-solid11"
-                                                                        style="margin-right: 3px"></i>{{ $work->jobrel->name }}
+                                                                        style="margin-right: 3px"></i>{{ number_format($work->price, 0, '.', ' ') }}so'm
                                                                 </p>
                                                             </div>
                                                             <div>
                                                                 <p><i class="fa-solid fa-user-doctor fa-solid11"
-                                                                        style=" margin-right: 3px;"></i>
-                                                                    {{ number_format($work->price, 0, '.', ' ') }}so'm</p>
+                                                                        style=" margin-right: 3px;"></i>{{ $work->jobrel->name }}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <footer class="card-footer flexbox align-items-center">

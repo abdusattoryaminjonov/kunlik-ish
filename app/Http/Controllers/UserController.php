@@ -35,6 +35,19 @@ class UserController extends Controller
       // $v = Viloyat::all();
       return view('user_profil', compact('habarlar', 'jobs', 'v', 'notf'));
    }
+
+
+   public function AllUsers()
+   {
+
+      $users = User::orderBy('name')->get();
+
+
+      return view('users', compact('users'));
+
+   }
+
+
    function login(Request $request)
    {
       $incomingFields = $request->validate([
@@ -92,10 +105,10 @@ class UserController extends Controller
 
    public function showUser(int $id)
    {
-      if(auth()->id() == $id){
+      if (auth()->id() == $id) {
          return redirect('profil');
       }
-      
+
       $user = User::find($id);
       //$jobs = Job::orderBy('name')->get();
       return view('show_user', compact('user'));

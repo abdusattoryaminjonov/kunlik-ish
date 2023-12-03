@@ -1,18 +1,17 @@
 @extends('layout')
 @section('title', 'Home')
 @section('content')
-    <div class="mt-3 d-flex justify-content-around">
-        <div class="d-flex justify-content-around">
+    <div class="puding11">
+        <div class="d-flex justify-content-center ">
             <form action="{{ route('search') }}" method="POST" class="d-flex " role="search">
                 @csrf
-                <select style="width: 300px;  " id="inputState" class="form-select   chosen-select" name="job">
+                <select class="form-select chosen-select classs11" name="job">
                     <option selected disabled>Which job</option>
                     @foreach ($jobs as $job)
                         <option value="{{ $job->id }}">{{ $job->name }}</option>
                     @endforeach
                 </select>
-                <select style="width: 300px;" name="place" id="inputState"
-                    class="form-select border border-primary chosen-select">
+                <select name="place" id="inputState" class="form-select border border-primary chosen-select">
                     <option selected disabled>Which district</option>
                     @foreach ($v as $viloyat)
                         <optgroup label="{{ $viloyat->name_uz }}">
@@ -22,9 +21,11 @@
                         </optgroup>
                     @endforeach
                 </select>
-                <button class="btn btn-primary" style="height: 44px;" type="submit">
-                    <img style="width: 20px !important" src="{{ asset('icons/search.ico') }}">
-                </button>
+                <div class="bac1">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -39,7 +40,8 @@
                             </div>
                             <div class="mt-3">
                                 <h3><i class="fa-solid fa-sack-dollar fa-solid11"
-                                        style="margin-right: 3px"></i>{{ number_format($work->price,0,'.', ' ') }} so'm</h3>
+                                        style="margin-right: 3px"></i>{{ number_format($work->price, 0, '.', ' ') }} so'm
+                                </h3>
                                 <h5><i class="fa-solid fa-calendar-days fa-solid11"
                                         style="margin-right: 3px"></i>{{ $work->date }}
                                 </h5>
@@ -112,7 +114,7 @@
                                 <div class="d-flex text-center mt-2">
                                     <img style="width: 25px; margin-right: 5px"
                                         src="{{ asset('icons/workers_price.ico') }}" alt="">
-                                    <h6>{{number_format($work->price,0,'.', ' ')}} so'm</h6>
+                                    <h6>{{ number_format($work->price, 0, '.', ' ') }} so'm</h6>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -149,6 +151,38 @@
 
     </div>
     <style>
+        .bac1 button {
+            height: 44px;
+        }
+
+        .chosen-container-single {
+            width: 320px !important;
+            box-shadow: -14px 19px 20px -16px rgba(121, 148, 179, 0.75);
+            -webkit-box-shadow: -14px 19px 20px -16px rgba(121, 148, 179, 0.75);
+            -moz-box-shadow: -14px 19px 20px -16px rgba(121, 148, 179, 0.75);
+        }
+
+        .puding11 {
+            padding-top: 50px !important;
+        }
+
+        .chosen-drop {
+            width: 320px !important;
+        }
+
+        .chosen-container-single-nosearch {
+            width: 320px !important;
+            margin-left: 5px !important;
+            bbox-shadow: -14px 19px 20px -16px rgba(121, 148, 179, 0.75);
+            -webkit-box-shadow: -14px 19px 20px -16px rgba(121, 148, 179, 0.75);
+            -moz-box-shadow: -14px 19px 20px -16px rgba(121, 148, 179, 0.75);
+        }
+
+        .chosen-single {
+            margin-left: 0px !important;
+            border-radius: 0px !important
+        }
+
         .chosen-container-single .chosen-single div b {
             display: block !important;
             opacity: 0 !important;

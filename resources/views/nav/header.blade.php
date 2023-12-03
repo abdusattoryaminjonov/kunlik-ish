@@ -13,7 +13,7 @@
                     <a class="nav-link" href="/work">WoRk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/show-user">show-user</a>
+                    <a class="nav-link" href="{{route('users')}}">show-user</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="/game">Game</a>
