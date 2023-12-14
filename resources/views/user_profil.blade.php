@@ -76,7 +76,8 @@
                                 <img style="width: 25px !important" src="{{ asset('icons/work_post.ico') }}">Yaratilgan
                                 Ishlar
                             </a>
-                            <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                            <a href="#account" data-toggle="tab"
+                                class="nav-item nav-link has-icon nav-link-faded  @if ($errors->any()) active @endif">
                                 <img style="width: 25px !important" src="{{ asset('icons/plus_work.ico') }}">Ish Yaratish
                             </a>
                             <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">

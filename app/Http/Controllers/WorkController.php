@@ -93,18 +93,11 @@ class WorkController extends Controller
 
     public function userINWork(Request $request, User $user)
     {
-        // $workersNotif = [
-        //     'body' => 'Yangi habar',
-        //     'userdata' => '',
-        //     'url' => url('/profil'),
-        //     'raxmat' => 'Senda 14kun bor'
-        // ];
-
         auth()->user()->works()->syncWithoutDetaching($request->input('work_id'));
-        // auth()->user()->works()->syncWithoutDetaching($request->input('work_id')->input('status'));
-        //$user->notify(new Jo_apply($workersNotif));
         return redirect('/home');
     }
+
+    
     public function getUsertoWork(Request $request)
     {
         $work = $request->validate([

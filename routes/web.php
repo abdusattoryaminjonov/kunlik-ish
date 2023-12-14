@@ -84,7 +84,7 @@ Route::get('/admin', function () {
     }
     return view('loginadmin');
 
-});
+})->middleware('auth:admin');
 
 Route::get('/m', function () {
     return view('menu');
@@ -92,13 +92,16 @@ Route::get('/m', function () {
 
 // Route::post('/search', [WorkController::class, '']);
 
-Route::get('/profil', [UserController::class, 'index'])->name('profil');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profil', [UserController::class, 'index'])->name('profil');
 
-Route::put('/edit-user-data', [UserController::class, 'editUser'])->name('edit_user');
-Route::put('/change-password', [UserController::class, 'changePassword'])->name('change_password');
-Route::put('/edit-user-post/{work}', [WorkController::class, 'editWork'])->name('edit_user_post');
-Route::delete('/delete-user-post/{work}', [WorkController::class, 'deleteWork'])->name('delete_user_post');
-Route::get('/show-user/{user}', [UserController::class, 'showUser'])->name('showUser');
+    Route::put('/edit-user-data', [UserController::class, 'editUser'])->name('edit_user');
+    Route::put('/change-password', [UserController::class, 'changePassword'])->name('change_password');
+    Route::put('/edit-user-post/{work}', [WorkController::class, 'editWork'])->name('edit_user_post');
+    Route::delete('/delete-user-post/{work}', [WorkController::class, 'deleteWork'])->name('delete_user_post');
+    Route::get('/show-user/{user}', [UserController::class, 'showUser'])->name('showUser');
+});
+
 
 
 

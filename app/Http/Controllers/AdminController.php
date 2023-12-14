@@ -17,7 +17,7 @@ class AdminController extends Authenticatable
          'name' => 'required',
          'password' => 'required'
       ]);
-
+      dd($request);
       // Muhim joyi esda qosin "guard('admin')"
       if (auth()->guard('admin')->attempt(['name' => $incomingFields['name'], 'password' => $incomingFields['password']])) {
          $request->session()->regenerate();

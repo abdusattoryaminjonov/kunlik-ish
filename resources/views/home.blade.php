@@ -117,16 +117,18 @@
                                     <h6>{{ number_format($work->price, 0, '.', ' ') }} so'm</h6>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <label>Ishga qo'shiling -> </label>
-                                <form action="{{ route('userInWork', ['user' => auth()->user()->id]) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" value="{{ $work->id }}" name="work_id">
-                                    {{-- <input type="hidden" value="0" name="status"> --}}
-                                    {{-- @if (count($work->user)) --}}
-                                    <button type="submit" class="btn btn-primary" id="liveToastBtn">click</button>
-                                </form>
-                            </div>
+                            @auth
+                                <div class="modal-footer">
+                                    <label>Ishga qo'shiling -> </label>
+                                    <form action="{{ route('userInWork', ['user' => auth()->user()->id]) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" value="{{ $work->id }}" name="work_id">
+                                        {{-- <input type="hidden" value="0" name="status"> --}}
+                                        {{-- @if (count($work->user)) --}}
+                                        <button type="submit" class="btn btn-primary" id="liveToastBtn">click</button>
+                                    </form>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                 </div>
