@@ -61,7 +61,7 @@ class User extends Authenticatable
         return $this->hasMany(Work::class);
     }
 
-    public function jobs()
+    public function jobs() //
     {
         return $this->belongsToMany(Job::class, 'user_job', 'user_id', 'job_id');
     }

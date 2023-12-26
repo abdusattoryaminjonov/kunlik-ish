@@ -28,11 +28,15 @@
                     @endif
                     <div class="col mb-3">
                         <div class="card">
-                            <div class="colorB"></div>
+                            <div class="colorB">
+
+                                <h5 style="color: #ffffff" class="card-title">{{ $user->name }} {{ $user->surname }}</h5>
+
+                            </div>
                             <div class="card-body text-center">
-                                <h5 class="card-title">{{ $user->name }} {{ $user->surname }}</h5>
                                 <p class="text-secondary mb-1">Full Stack Developer</p>
                                 <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                <p>{{ $user->phonenumber }}</p>
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-light btn-sm bg-white has-icon btn-block" type="button"><i
@@ -55,4 +59,17 @@
             </div>
         </div>
     </div>
+    <style>
+        .card {
+            height: 300px;
+        }
+
+        .card-footer {
+            height: 110px;
+        }
+
+        .colorB {
+            height: 40px;
+        }
+    </style>
 @endsection

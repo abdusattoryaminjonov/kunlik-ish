@@ -77,7 +77,7 @@
                                 Ishlar
                             </a>
                             <a href="#account" data-toggle="tab"
-                                class="nav-item nav-link has-icon nav-link-faded  @if ($errors->any()) active @endif">
+                                class="nav-item nav-link has-icon nav-link-faded  @if ($errors->any()) errorISH @endif">
                                 <img style="width: 25px !important" src="{{ asset('icons/plus_work.ico') }}">Ish Yaratish
                             </a>
                             <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">

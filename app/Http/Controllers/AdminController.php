@@ -17,7 +17,7 @@ class AdminController extends Authenticatable
          'name' => 'required',
          'password' => 'required'
       ]);
-      dd($request);
+      // dd(auth()->guard('admin')->attempt(['name' => $incomingFields['name'], 'password' => $incomingFields['password']]));
       // Muhim joyi esda qosin "guard('admin')"
       if (auth()->guard('admin')->attempt(['name' => $incomingFields['name'], 'password' => $incomingFields['password']])) {
          $request->session()->regenerate();
@@ -31,7 +31,7 @@ class AdminController extends Authenticatable
          'name' => ['required', Rule::unique('admins', 'name')],
          'email' => ['required ', 'email'],
          'phonenumber' => 'required',
-         'password' => ['required', 'min:8', 'max:100']
+         'password' => ['required', 'max:100']
       ]);
       $incomingFields['password'] = bcrypt($incomingFields['password']);
       $admin = Admin::create($incomingFields);

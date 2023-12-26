@@ -187,3 +187,8 @@ box-shadow: -7px 8px 26px -8px rgba(60, 33, 225, 0.71);
     -webkit-box-shadow: -7px 9px 15px -8px rgba(60, 33, 225, 0.55);
     -moz-box-shadow: -7px 9px 15px -8px rgba(60, 33, 225, 0.55);
 }
+
+.errorISH{
+    color: white;
+    background-color: red;
+}
